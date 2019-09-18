@@ -56,6 +56,7 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 * **Gordon Pham-Nguyen** - *Developer* - [gpnn](https://github.com/gpnn/)
 * **Mackenzie Bellemore** - *Developer* - [Mackbellemore](https://github.com/Mackbellemore/)
 * **Alejandro Lacasia, 40060323** - "Developer" - https://github.com/alelacasi
+* **Sujan Saravanamuthu** - *Developer* - [tbksujan](https://github.com/tbksujan/)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
