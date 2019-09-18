@@ -21,10 +21,12 @@ Make sure to have node installed https://nodejs.org/en/
 
 ### Installing
 
-Clone the repository.
-CD into the 
-Open up a command line and run 'npm i'
-Next run 'npm start' to start both the front end and server at the same time
+* Clone the repository.
+* CD into the folder path \soen341-project
+* Open up a command line and run 'npm i'
+* CD \soen341-project\client and run 'npm i'
+* CD \soen341-project\backend and run 'npm i'
+* Next run 'npm start' to start both the front end and server at the same time
 
 ## Running the tests
 
