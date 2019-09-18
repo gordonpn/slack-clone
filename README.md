@@ -1,6 +1,19 @@
 # SOEN341-project
 
-Develop a Slack clone using the languages/frameworks of our choice.
+## Description
+
+Develop a Slack clone web app using the languages/frameworks of our choice.
+
+## Objective
+
+Purpose of the project is to demonstrate the importance and application of the software process.
+
+## Core features
+There are three core features: 
+
+*  Users must be able to create channels
+*  Users must be able to join channels
+*  Users must be able to send messages in channels
 
 ## Getting Started
 
@@ -55,8 +68,7 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 
 * **Gordon Pham-Nguyen** - *Developer* - [gpnn](https://github.com/gpnn/)
 * **Mackenzie Bellemore** - *Developer* - [Mackbellemore](https://github.com/Mackbellemore/)
-* **Alejandro Lacasia, 40060323** - "Developer" - https://github.com/alelacasi
-* **Sujan Saravanamuthu** - *Developer* - [tbksujan](https://github.com/tbksujan/)
+* **Alejandro Lacasia** - *Developer* - [alelacasi](https://github.com/alelacasi)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
