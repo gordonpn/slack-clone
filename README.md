@@ -30,6 +30,7 @@ Make sure to have node installed https://nodejs.org/en/
 * Open up a command line and run 'npm i'
 * CD \soen341-project\client and run 'npm i'
 * CD \soen341-project\backend and run 'npm i'
+* CD ..to go up a directory (back to \soen341-project)
 * Next run 'npm start' to start both the front end and server at the same time
 
 ## Running the tests
