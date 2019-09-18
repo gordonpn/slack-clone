@@ -1,36 +1,30 @@
 # SOEN341-project
 
-Develop a Slack clone using the languages/frameworks of our choice.
+## Description
 
-## Getting Started
+Develop a Slack clone web app using the languages/frameworks of our choice.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+## Objective
+
+Purpose of the project is to demonstrate the importance and application of the software process.
+
+## Core features
+There are three core features: 
+
+*  Users must be able to create channels
+*  Users must be able to join channels
+*  Users must be able to send messages in channels
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+Make sure to have node installed https://nodejs.org/en/
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Clone the repository.
+CD into the 
+Open up a command line and run 'npm i'
+Next run 'npm start' to start both the front end and server at the same time
 
 ## Running the tests
 
@@ -55,7 +49,7 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 
 * **Gordon Pham-Nguyen** - *Developer* - [gpnn](https://github.com/gpnn/)
 * **Mackenzie Bellemore** - *Developer* - [Mackbellemore](https://github.com/Mackbellemore/)
-* **Alejandro Lacasia, 40060323** - "Developer" - https://github.com/alelacasi
+* **Alejandro Lacasia** - *Developer* - [alelacasi](https://github.com/alelacasi)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
