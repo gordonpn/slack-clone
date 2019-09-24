@@ -15,3 +15,13 @@ code {
 .jumbotron h1 {
 	text-align: center;
 }
+
+.chatRoom {
+	background-color: beige;
+	height: 200%;
+}
+
+.channels {
+	background-color: aliceblue;
+	height: 200%;
+}
