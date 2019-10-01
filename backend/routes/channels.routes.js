@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const channels = require('../backend/controllers/controller.js');
+    const channels = require('../controllers/channels.controller.js');
 
     // Create a new Channel
     app.post('/channels', channels.create);
