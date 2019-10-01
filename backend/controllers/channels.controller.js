@@ -1,7 +1,32 @@
 const Channel = require('../models/Channel.js');
 
+// create channel
 exports.create = (req, res) => {
-    // create channel
+    // Validate request
+    if (!req.name) {
+        return res.status(400).send({
+            message: "Note content can not be empty"
+        });
+    }
+
+    // Create a Channel
+    const channel = new Channel({
+        name: req.name
+    });
+
+    // Save Note in the database
+    channel.save()
+        .then(data => {
+            res.send(data);
+        }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+exports.findAll = (req, res) => {
+    // find all channels
     Channel.find()
         .then(channels => {
             res.send(channels);
@@ -10,10 +35,6 @@ exports.create = (req, res) => {
             message: err.message || "Error occurred while creating a channel."
         })
     })
-};
-
-exports.findAll = (req, res) => {
-    // find all channels
 };
 
 exports.findOne = (req, res) => {
