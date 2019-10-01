@@ -24,7 +24,7 @@ mongoose
     process.exit();
   });
 
-require('./routes.js')(app);
+require('./routes/channels.routes.js')(app);
 
 app.listen(port, () => {
   console.log('Server is running on port: ${port}');
