@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import ChatRoom from "./ChatRoom";
-import ChannelList from "./ChannelList";
-import AddChannelForm from "./AddChannelForm";
+import React, { Component } from 'react';
+import ChatRoom from './ChatRoom';
+import ChannelList from './ChannelList';
+import AddChannelForm from './AddChannelForm';
 
 export default class ChatDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      channels: [{ name: "channel1", id: 1 }, { name: "channel2", id: 2 }],
+      channels: [{ name: 'channel1', id: 1 }, { name: 'channel2', id: 2 }],
       user: this.props.user,
       channelMessages: [],
-      channelSelected: ""
+      channelSelected: ''
     };
 
     this.selectChannel = this.selectChannel.bind(this);
@@ -52,7 +52,7 @@ export default class ChatDashboard extends Component {
     return (
       <div>
         <div className="row dash">
-          <div className="col-sm-3">
+          <div className="col-sm-3 channellist">
             <div className="channels">
               <ChannelList
                 channels={this.state.channels}

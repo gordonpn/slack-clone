@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import DeleteChannelForm from "./DeleteChannelForm";
+import React, { Component } from 'react';
+//import DeleteChannelForm from './DeleteChannelForm';
 
 export default class AddChannelForm extends Component {
   constructor() {
     super();
     this.state = {
-      channelName: ""
+      channelName: ''
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -15,7 +15,7 @@ export default class AddChannelForm extends Component {
   render() {
     return (
       <div className="col-sm-3">
-        <form className="form-group" style={{ display: "block" }}>
+        <form className="form-group" style={{ display: 'block' }}>
           <input
             className="form-control"
             value={this.state.channelName}
@@ -25,11 +25,12 @@ export default class AddChannelForm extends Component {
             onChange={this.handleChange}
           />
           <input
+            className="submitButton"
             type="submit"
-            value="+"
+            value="Create Channel"
+            disabled={!this.state.channelName}
             onClick={e => this.props.addChannel(e, this.state.channelName)}
           />
-          <DeleteChannelForm deleteChannel={this.props.deleteChannel} />
         </form>
       </div>
     );

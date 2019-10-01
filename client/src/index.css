@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
@@ -18,16 +18,22 @@ code {
 
 .chatRoom {
   background-color: beige;
-  height: 300%;
+  height: 400px;
   max-height: 300%;
-}
-
-.channels {
-  background-color: aliceblue;
-  height: 300%;
-  max-height: 300%;
+  overflow: auto;
 }
 
 .testy {
   display: block;
+}
+
+.channellist {
+  background-color: aliceblue;
+  height: 300px;
+  max-height: 300px;
+  overflow: auto;
+}
+.submitButton {
+  border: none;
+  padding: 10px;
 }
