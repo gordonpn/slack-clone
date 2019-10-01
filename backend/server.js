@@ -11,12 +11,16 @@ app.use(cors());
 app.use(express.json());
 
 const db_uri = process.env.ATLAS_URI;
-mongoose.connect(db_uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('Database connection success');
+mongoose.connect(db_uri,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+const db_connection = mongoose.connection;
+db_connection.once('open', () => {
+    console.log('Database connection success');
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port: ${port}`);
+    console.log(`Server is running on port: ${port}`);
 });
