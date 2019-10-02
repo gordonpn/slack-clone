@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ChatRoom from './ChatRoom';
 import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
-import axios from 'axios';
+import {addChannels, getChannels} from '../api/channels'
 
 export default class ChatDashboard extends Component {
   constructor(props) {
@@ -22,6 +22,12 @@ export default class ChatDashboard extends Component {
 
   componentDidMount() {
     // fetch all the channels then set state
+    this.loadChannels();
+  }
+
+  loadChannels() {
+    getChannels()
+    // some logic to populate the channels array in the constructor
   }
 
   selectChannel(channelId) {
@@ -29,22 +35,13 @@ export default class ChatDashboard extends Component {
   }
 
   addChannel(e, name) {
-    // post to db with new channel name
-    const response = axios.post(
-      '/channels',
-      {"name": name},
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    console.log(response.data);
-
     e.preventDefault();
     if (!name) return;
-    const id = Math.floor(Math.random() * 100);
-    const newelement = {name: name, id: id};
+
+    // post to db with new channel name
+    const channelId = addChannels(name);
+
+    const newelement = {name: name, id: channelId};
     this.setState(prevState => ({
       channels: [...prevState.channels, newelement]
     }));
