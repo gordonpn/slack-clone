@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ChatRoom from './ChatRoom';
 import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
+import {addChannels, getChannels} from '../api/channels'
 
 export default class ChatDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      channels: [{ name: 'channel1', id: 1 }, { name: 'channel2', id: 2 }],
+      channels: [{name: 'channel1', id: 1}, {name: 'channel2', id: 2}],
       user: this.props.user,
       channelMessages: [],
       channelSelected: ''
@@ -18,20 +19,29 @@ export default class ChatDashboard extends Component {
     this.addChannel = this.addChannel.bind(this);
     this.deleteChannel = this.deleteChannel.bind(this);
   }
+
   componentDidMount() {
     // fetch all the channels then set state
+    this.loadChannels();
+  }
+
+  loadChannels() {
+    getChannels()
+    // some logic to populate the channels array in the constructor
   }
 
   selectChannel(channelId) {
-    this.setState({ channelSelected: channelId });
+    this.setState({channelSelected: channelId});
   }
 
   addChannel(e, name) {
-    // post to db with new channel name
     e.preventDefault();
     if (!name) return;
-    const id = Math.floor(Math.random() * 100);
-    const newelement = { name: name, id: id };
+
+    // post to db with new channel name
+    const channelId = addChannels(name);
+
+    const newelement = {name: name, id: channelId};
     this.setState(prevState => ({
       channels: [...prevState.channels, newelement]
     }));
@@ -48,6 +58,7 @@ export default class ChatDashboard extends Component {
       channelSelected: channelSelected.id
     });
   }
+
   render() {
     return (
       <div>
