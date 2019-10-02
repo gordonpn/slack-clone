@@ -25,7 +25,7 @@ exports.create = (req, res) => {
     });
 };
 
-    // find all channels
+// find all channels
 exports.findAll = (req, res) => {
     Channel.find()
         .then(channels => {
@@ -37,18 +37,18 @@ exports.findAll = (req, res) => {
     })
 };
 
-    // find specific channel
+// find specific channel
 exports.findOne = (req, res) => {
     Channel.findById(req.params.channelId)
         .then(channel => {
-            if(!channel) {
+            if (!channel) {
                 return res.status(404).send({
                     message: "Channel not found with id " + req.params.channelId
                 });
             }
             res.send(channel);
         }).catch(err => {
-        if(err.kind === 'ObjectId') {
+        if (err.kind === 'ObjectId') {
             return res.status(404).send({
                 message: "Channel not found with id " + req.params.channelId
             });
@@ -59,10 +59,10 @@ exports.findOne = (req, res) => {
     });
 };
 
-    // update channel
+// update channel
 exports.update = (req, res) => {
     // Validate Request
-    if(!req.body.name) {
+    if (!req.body.name) {
         return res.status(400).send({
             message: "Channel name can not be empty"
         });
@@ -73,14 +73,14 @@ exports.update = (req, res) => {
         name: req.body.name
     }, {new: true})
         .then(channel => {
-            if(!channel) {
+            if (!channel) {
                 return res.status(404).send({
                     message: "Channel not found with id " + req.params.channelId
                 });
             }
             res.send(channel);
         }).catch(err => {
-        if(err.kind === 'ObjectId') {
+        if (err.kind === 'ObjectId') {
             return res.status(404).send({
                 message: "Note not found with id " + req.params.channelId
             });
@@ -91,18 +91,18 @@ exports.update = (req, res) => {
     });
 };
 
-    // channel delete
+// channel delete
 exports.delete = (req, res) => {
     Channel.findByIdAndRemove(req.params.channelId)
         .then(channel => {
-            if(!channel) {
+            if (!channel) {
                 return res.status(404).send({
                     message: "Channel not found with id " + req.params.channelId
                 });
             }
             res.send({message: "Channel deleted successfully!"});
         }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if (err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
                 message: "Channel not found with id " + req.params.channelId
             });
