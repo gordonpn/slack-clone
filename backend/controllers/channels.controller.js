@@ -5,7 +5,7 @@ exports.create = (req, res) => {
     // Validate request
     if (!req.body.name) {
         return res.status(400).send({
-            message: "Note content can not be empty"
+            message: "Channel name can not be empty"
         });
     }
 
@@ -20,7 +20,7 @@ exports.create = (req, res) => {
             res.send(data);
         }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while creating the Note."
+            message: err.message || "Some error occurred while creating the Channel."
         });
     });
 };
@@ -32,19 +32,83 @@ exports.findAll = (req, res) => {
             res.send(channels);
         }).catch(err => {
         res.status(500).send({
-            message: err.message || "Error occurred while creating a channel."
+            message: err.message || "Error occurred while creating the Channel."
         })
     })
 };
 
-exports.findOne = (req, res) => {
     // find specific channel
+exports.findOne = (req, res) => {
+    Channel.findById(req.params.channelId)
+        .then(channel => {
+            if(!channel) {
+                return res.status(404).send({
+                    message: "Channel not found with id " + req.params.channelId
+                });
+            }
+            res.send(channel);
+        }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Channel not found with id " + req.params.channelId
+            });
+        }
+        return res.status(500).send({
+            message: "Channel retrieving note with id " + req.params.channelId
+        });
+    });
 };
 
-exports.update = (req, res) => {
     // update channel
+exports.update = (req, res) => {
+    // Validate Request
+    if(!req.body.name) {
+        return res.status(400).send({
+            message: "Channel name can not be empty"
+        });
+    }
+
+    // Find note and update it with the request body
+    Channel.findByIdAndUpdate(req.params.channelId, {
+        name: req.body.name
+    }, {new: true})
+        .then(channel => {
+            if(!channel) {
+                return res.status(404).send({
+                    message: "Channel not found with id " + req.params.channelId
+                });
+            }
+            res.send(channel);
+        }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id " + req.params.channelId
+            });
+        }
+        return res.status(500).send({
+            message: "Error updating note with id " + req.params.channelId
+        });
+    });
 };
 
-exports.delete = (req, res) => {
     // channel delete
+exports.delete = (req, res) => {
+    Channel.findByIdAndRemove(req.params.channelId)
+        .then(channel => {
+            if(!channel) {
+                return res.status(404).send({
+                    message: "Channel not found with id " + req.params.channelId
+                });
+            }
+            res.send({message: "Channel deleted successfully!"});
+        }).catch(err => {
+        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+            return res.status(404).send({
+                message: "Channel not found with id " + req.params.channelId
+            });
+        }
+        return res.status(500).send({
+            message: "Could not delete Channel with id " + req.params.channelId
+        });
+    });
 };
