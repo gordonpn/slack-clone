@@ -8,7 +8,7 @@ module.exports = app => {
   app.get('/users', users.findAll);
 
   // Retrieve a single User with userId
-  app.get('/users/:userId', users.findOne);
+  app.get('/users/:userId', users.findById);
 
   //Retrieve a user by name
   app.get('/users/username/:username', users.findByName)
