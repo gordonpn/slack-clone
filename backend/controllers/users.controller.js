@@ -17,7 +17,6 @@ exports.create = (req, res) => {
   user
     .save()
     .then(data => {
-      console.log('saved data', data);
       res.send(data);
     })
     .catch(err => {
@@ -40,7 +39,7 @@ exports.findAll = (req, res) => {
 };
 
 //get a user by id
-exports.findOne = (req, res) => {
+exports.findById = (req, res) => {
   User.findById(req.params.userId)
     .then(user => {
       if (!user) {
@@ -58,6 +57,29 @@ exports.findOne = (req, res) => {
       }
       return res.status(500).send({
         message: 'Error retrieving user with id ' + req.params.userId
+      });
+    });
+};
+
+//get a user by name
+exports.findByName = (req, res) => {
+  User.find({ username: req.params.username })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({
+          message: 'User not found with name ' + req.params.username
+        });
+      }
+      res.send(user);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'User not found with name ' + req.params.username
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving user with name ' + req.params.username
       });
     });
 };
