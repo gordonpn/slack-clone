@@ -292,3 +292,9 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+.idea/checkstyle-idea.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/soen341-project.iml
+.idea/sonarlint/
+.idea/vcs.xml

@@ -21,29 +21,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+Make sure to have node installed https://nodejs.org/en/
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+* Clone the repository.
+* CD into the folder path \soen341-project
+* Open up a command line and run 'npm i'
+* CD \soen341-project\client and run 'npm i'
+* CD \soen341-project\backend and run 'npm i'
+* CD ..to go up a directory (back to \soen341-project)
+* Next run 'npm start' to start both the front end and server at the same time
 
 ## Running the tests
 
