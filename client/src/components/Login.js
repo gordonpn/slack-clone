@@ -12,6 +12,8 @@ export default class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.enableSignUpPage = this.enableSignUpPage.bind(this);
     this.enableLoginPage = this.enableLoginPage.bind(this);
+    this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
   handleChange(e) {
@@ -36,6 +38,22 @@ export default class Login extends Component {
     })
   }
 
+  signUp(e) {
+    e.preventDefault();
+    this.props.setUser(this.state.username);
+    this.setState({
+      username: ""
+    })
+  }
+
+  login(e) {
+    e.preventDefault();
+    this.props.logUserIn(this.state.username);
+    this.setState({
+      username: ""
+    })
+  }
+
 
   loginPage() {
     return (
@@ -46,7 +64,7 @@ export default class Login extends Component {
           <label>
             username:
             <input type="text" value={this.state.username} onChange={this.handleChange} />
-            <button onClick={e => this.props.logUserIn(e, this.state.username)} disabled={!this.state.username}> log me in</button>
+            <button onClick={e => this.login(e)} disabled={!this.state.username}> log me in</button>
           </label>
           <div>
             Don't have username? sign up here
@@ -66,7 +84,7 @@ export default class Login extends Component {
           <label>
             username:
             <input type="text" value={this.state.username} onChange={this.handleChange} />
-            <button onClick={e => this.props.setUser(e, this.state.username)} disabled={!this.state.username}> Sign me up</button>
+            <button onClick={e => this.signUp(e)} disabled={!this.state.username}> Sign me up</button>
           </label>
           <div>
             already have a username? log in here

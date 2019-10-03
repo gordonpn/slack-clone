@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //import axios from "axios";
 import ChatDashboard from "./components/ChatDashboard";
 import Login from "./components/Login";
-import { getUserByName, addUser } from "./api/user"
+import { getUserByName, addUser } from "./api/users"
 import "./index.css";
 
 export default class App extends Component {
@@ -17,12 +17,11 @@ export default class App extends Component {
     this.logUserIn = this.logUserIn.bind(this);
   }
 
-  async setUser(e, userName) {
-    e.preventDefault();
+  async setUser(userName) {
     try {
       const response = await await addUser(userName);
       if (response.data) {
-        alert("Thank you for signing up, please login with your username: ", userName);
+        alert(`Thank you for signing up, please login with your username: ${userName}`);
       }
     } catch (error) {
       console.log(error);
@@ -30,8 +29,7 @@ export default class App extends Component {
     }
   };
 
-  async logUserIn(e, userName) {
-    e.preventDefault();
+  async logUserIn(userName) {
     try {
       const response = await getUserByName(userName);//await axios.get(`/users/username/${userName}`);
       const newUser = {
