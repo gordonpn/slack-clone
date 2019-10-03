@@ -31,7 +31,11 @@ export default class App extends Component {
 
   async logUserIn(userName) {
     try {
-      const response = await getUserByName(userName);//await axios.get(`/users/username/${userName}`);
+      const response = await getUserByName(userName);
+      if (response.data.length === 0) {
+        console.log("invalid username");
+        return
+      }
       const newUser = {
         username: userName,
         id: response.data[0]._id,
