@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
+//import axios from "axios";
 import ChatDashboard from "./components/ChatDashboard";
 import Login from "./components/Login";
+import { getUserByName, addUser } from "./api/user"
 import "./index.css";
 
 export default class App extends Component {
@@ -9,68 +10,44 @@ export default class App extends Component {
     super();
     this.state = {
       user: { username: "", id: "", friendIDs: [], channelIDs: [] },
-      isLoggedIn: false
+      isLoggedIn: false,
+      isLoading: false
     };
     this.setUser = this.setUser.bind(this);
     this.logUserIn = this.logUserIn.bind(this);
   }
+
   async setUser(e, userName) {
     e.preventDefault();
-    await axios.post('/users', {
-      username: userName
-    })
-      .then(response => {
-        const newUser = {
-          username: userName,
-          id: response.data['_id'],
-          friendIDs: response.data['friendIDs'],
-          channelIDs: response.data['channelIDs']
-        }
-        this.setState({
-          user: newUser,
-          isLoggedIn: true
-        })
-      })
-      .catch(error => {
-        if (error.response) {
-          console.log(error.data.message);
-          alert("username already exits")
-        } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-        } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-        }
-      });
+    try {
+      const response = await await addUser(userName);
+      if (response.data) {
+        alert("Thank you for signing up, please login with your username: ", userName);
+      }
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   };
 
   async logUserIn(e, userName) {
     e.preventDefault();
-
-    await axios.get(`/users/username/${userName}`)
-      .then(response => {
-        // handle success
-        console.log("successful login");
-
-        const user = {
-          username: userName,
-          id: response.data['_id'],
-          friendIDs: response.data['friendIDs'],
-          channelIDs: response.data['channelIDs']
-        }
-        this.setState({
-          user: user,
-          isLoggedIn: true
-        })
-
+    try {
+      const response = await getUserByName(userName);//await axios.get(`/users/username/${userName}`);
+      const newUser = {
+        username: userName,
+        id: response.data[0]._id,
+        friendIDs: response.data[0].friendIDs,
+        channelIDs: response.data[0].channelIDs
+      }
+      this.setState({
+        user: newUser,
+        isLoggedIn: true
       })
-      .catch(function (error) {
-        // handle error
-        console.log(error.response.data);
-      })
+    } catch (error) {
+      console.log(error);
+      return;
+    }
   }
 
   render() {
@@ -80,12 +57,11 @@ export default class App extends Component {
           <h1>Slack Clone App</h1>
         </div>
         {!this.state.isLoggedIn ? (
-          <Login logUserIn={this.logUserIn} />
+          <Login logUserIn={this.logUserIn} setUser={this.setUser} />
         ) : (
             <ChatDashboard
               user={this.state.user}
               isloggedIn={this.state.isLoggedIn}
-              name="mack"
             />
           )}
       </div>
