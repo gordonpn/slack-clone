@@ -62,6 +62,29 @@ exports.findOne = (req, res) => {
     });
 };
 
+//get a user by name
+exports.findByName = (req, res) => {
+  User.find({ username: req.params.username })
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({
+          message: 'User not found with name ' + req.params.username
+        });
+      }
+      res.send(user);
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        return res.status(404).send({
+          message: 'User not found with name ' + req.params.username
+        });
+      }
+      return res.status(500).send({
+        message: 'Error retrieving user with name ' + req.params.username
+      });
+    });
+};
+
 // Update a User identified by the userId in the request
 exports.update = (req, res) => {
   // Validate Request
