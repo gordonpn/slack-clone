@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ChatRoom from './ChatRoom';
 import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
-import {addChannels, getChannels} from '../api/channels'
+import { addChannels, getChannels } from '../api/channels'
 
 export default class ChatDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      channels: [{name: 'channel1', id: 1}, {name: 'channel2', id: 2}],
+      channels: [{ name: 'channel1', id: 1 }, { name: 'channel2', id: 2 }],
       user: this.props.user,
       channelMessages: [],
       channelSelected: ''
@@ -21,6 +21,7 @@ export default class ChatDashboard extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.user);
     // fetch all the channels then set state
     this.loadChannels();
   }
@@ -31,7 +32,7 @@ export default class ChatDashboard extends Component {
   }
 
   selectChannel(channelId) {
-    this.setState({channelSelected: channelId});
+    this.setState({ channelSelected: channelId });
   }
 
   addChannel(e, name) {
@@ -41,7 +42,7 @@ export default class ChatDashboard extends Component {
     // post to db with new channel name
     const channelId = addChannels(name);
 
-    const newelement = {name: name, id: channelId};
+    const newelement = { name: name, id: channelId };
     this.setState(prevState => ({
       channels: [...prevState.channels, newelement]
     }));
@@ -76,12 +77,12 @@ export default class ChatDashboard extends Component {
               {!this.state.channelSelected ? (
                 <div>Please select a channel</div>
               ) : (
-                <ChatRoom
-                  channel={this.state.channelSelected}
-                  user={this.state.user}
-                  messages={this.getChannelMessages}
-                />
-              )}
+                  <ChatRoom
+                    channel={this.state.channelSelected}
+                    user={this.state.user}
+                    messages={this.getChannelMessages}
+                  />
+                )}
             </div>
           </div>
         </div>
