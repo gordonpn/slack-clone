@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ChatRoom from './ChatRoom';
 import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
-import { addChannels, getChannels } from '../api/channels'
+import {addChannels, getChannels} from '../api/channels'
 
 export default class ChatDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      channels: [{ name: 'channel1', id: 1 }, { name: 'channel2', id: 2 }],
+      channels: [{name: 'channel1', id: 1}, {name: 'channel2', id: 2}],
       user: this.props.user,
       channelMessages: [],
       channelSelected: ''
@@ -32,20 +32,23 @@ export default class ChatDashboard extends Component {
   }
 
   selectChannel(channelId) {
-    this.setState({ channelSelected: channelId });
+    this.setState({channelSelected: channelId});
   }
 
-  addChannel(e, name) {
+  async addChannel(e, name) {
     e.preventDefault();
     if (!name) return;
 
-    // post to db with new channel name
-    const channelId = addChannels(name);
-
-    const newelement = { name: name, id: channelId };
-    this.setState(prevState => ({
-      channels: [...prevState.channels, newelement]
-    }));
+    // post to db with new channel name and set state with the new channelId
+    try {
+      const channelId = await addChannels(name, this.props.user.id);
+      const newElement = {name: name, id: channelId};
+      this.setState(prevState => ({
+        channels: [...prevState.channels, newElement]
+      }));
+    } catch (error) {
+      console.log("cannot add this channel"); // handle this better in future issue
+    }
   }
 
   deleteChannel(e) {
