@@ -63,7 +63,7 @@ exports.findById = (req, res) => {
 
 //get a user by name
 exports.findByName = (req, res) => {
-  User.find({ username: req.params.username })
+  User.find({username: req.params.username})
     .then(user => {
       if (!user) {
         return res.status(404).send({
@@ -99,7 +99,7 @@ exports.update = (req, res) => {
   if (req.body.channelIDs) updatedParams.channelIDs = req.body.channelIDs;
 
   // Find user and update it with the request body
-  User.findByIdAndUpdate(req.params.userId, updatedParams, { new: true })
+  User.findByIdAndUpdate(req.params.userId, updatedParams, {new: true})
     .then(user => {
       if (!user) {
         return res.status(404).send({
@@ -120,6 +120,21 @@ exports.update = (req, res) => {
     });
 };
 
+exports.findByIdAndAddChannelId = (userId, channelId) => {
+  User.findOneAndUpdate(userId, {$push: {channelIDs: channelId}})
+    .then(user => {
+      if (!user) {
+        console.log("no user found with that id")
+      }
+      return user
+    })
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        console.log('User not found with id (objectID error)');
+      }
+      console.log('Error updating user with id', userId);
+    });
+}
 // Delete a user with the specified userId in the request
 exports.delete = (req, res) => {
   User.findByIdAndRemove(req.params.userId)
@@ -129,7 +144,7 @@ exports.delete = (req, res) => {
           message: 'User not found with id ' + req.params.userId
         });
       }
-      res.send({ message: 'User deleted successfully!' });
+      res.send({message: 'User deleted successfully!'});
     })
     .catch(err => {
       if (err.kind === 'ObjectId' || err.name === 'NotFound') {
