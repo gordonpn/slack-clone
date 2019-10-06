@@ -8,12 +8,15 @@ export async function getChannels() {
   return channelsArray;
 }
 
-export function addChannels(name) {
+export async function addChannels(name, id) {
   let channelId = "";
 
-  axios.post(
+  await axios.post(
     '/channels',
-    {"name": name},
+    {
+      "name": name,
+      "ownerId": id
+    },
     {
       headers: {
         'Content-Type': 'application/json'
@@ -21,6 +24,8 @@ export function addChannels(name) {
     }
   ).then(res => {
     channelId = res.data['_id'];
+  }).catch(err => {
+    throw err;
   });
 
   return channelId;
