@@ -26,7 +26,7 @@ function Modals() {
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Select this hoe
+            Invite This User
           </Button>
         </Modal.Footer>
       </Modal>
