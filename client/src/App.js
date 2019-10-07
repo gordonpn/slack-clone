@@ -4,6 +4,7 @@ import ChatDashboard from "./components/ChatDashboard";
 import Login from "./components/Login";
 import { getUserByName, addUser } from "./api/users"
 import "./index.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class App extends Component {
   constructor() {

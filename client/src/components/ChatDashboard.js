@@ -1,18 +1,21 @@
-import React, {Component} from 'react';
-import ChatRoom from './ChatRoom';
-import ChannelList from './ChannelList';
-import AddChannelForm from './AddChannelForm';
-import {addChannels, getChannels} from '../api/channels'
+import React, { Component } from "react";
+import ChatRoom from "./ChatRoom";
+import ChannelList from "./ChannelList";
+import AddChannelForm from "./AddChannelForm";
+
+import { addChannels, getChannels } from "../api/channels";
+import Modal from "./Modal";
 
 export default class ChatDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      channels: [{name: 'channel1', id: 1}, {name: 'channel2', id: 2}],
+      channels: [{ name: "channel1", id: 1 }, { name: "channel2", id: 2 }],
       user: this.props.user,
       channelMessages: [],
-      channelSelected: ''
+      channelSelected: "",
+      show: false
     };
 
     this.selectChannel = this.selectChannel.bind(this);
@@ -27,12 +30,12 @@ export default class ChatDashboard extends Component {
   }
 
   loadChannels() {
-    getChannels()
+    getChannels();
     // some logic to populate the channels array in the constructor
   }
 
   selectChannel(channelId) {
-    this.setState({channelSelected: channelId});
+    this.setState({ channelSelected: channelId });
   }
 
   async addChannel(e, name) {
@@ -42,7 +45,7 @@ export default class ChatDashboard extends Component {
     // post to db with new channel name and set state with the new channelId
     try {
       const channelId = await addChannels(name, this.props.user.id);
-      const newElement = {name: name, id: channelId};
+      const newElement = { name: name, id: channelId };
       this.setState(prevState => ({
         channels: [...prevState.channels, newElement]
       }));
@@ -80,12 +83,13 @@ export default class ChatDashboard extends Component {
               {!this.state.channelSelected ? (
                 <div>Please select a channel</div>
               ) : (
-                  <ChatRoom
-                    channel={this.state.channelSelected}
-                    user={this.state.user}
-                    messages={this.getChannelMessages}
-                  />
-                )}
+                <ChatRoom
+                  channel={this.state.channelSelected}
+                  user={this.state.user}
+                  messages={this.getChannelMessages}
+                />
+              )}
+              <Modal />
             </div>
           </div>
         </div>
