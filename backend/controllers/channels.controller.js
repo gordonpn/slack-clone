@@ -19,8 +19,8 @@ exports.create = (req, res) => {
   // Save Channel in the database
   channel.save()
     .then(data => {
+      const user = users.findByIdAndAddChannelId(req.body.ownerId, data._id);
       res.send(data);
-      users.findByIdAndAddChannelId(req.body.ownerId, data._id);
     }).catch(err => {
       res.status(500).send({
         message: err.message || "Some error occurred while creating the Channel."
