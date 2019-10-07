@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ChatRoom from './ChatRoom';
 import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
-import {addChannels, getChannels} from '../api/channels'
+import {addChannels, getChannelsForUser} from '../api/channels'
 
 export default class ChatDashboard extends Component {
   constructor(props) {
@@ -27,11 +27,8 @@ export default class ChatDashboard extends Component {
   }
 
   async loadChannels() {
-    let loadedChannels = [];
-    loadedChannels = Array.from(await getChannels());
+    let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
     this.setState({channels: loadedChannels});
-    // this.state.channels = getChannels();
-    // getChannels();
   }
 
   selectChannel(channelId) {

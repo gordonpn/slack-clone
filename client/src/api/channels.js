@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getChannels() {
-  const rawResponse = [];
+  let rawResponse = [];
   await axios.get('/channels').then(response => {
     rawResponse.push(response.data);
   });
@@ -15,7 +15,29 @@ export async function getChannels() {
     channels.push(aChannel);
   });
 
-  console.log(channels);
+  return channels;
+}
+
+export async function getChannelsForUser(ids) {
+  let rawResponse = [];
+  for (let channelID of ids) {
+    await axios.get(`/channel/${channelID}`).then(value => {
+      rawResponse.push(value.data);
+    }).catch(err => {
+      console.log(err)
+      // todo do something with this exception?
+    })
+  }
+
+  let channels = [];
+  rawResponse.forEach(channel => {
+    let aChannel = {
+      name: channel['name'],
+      id: channel['_id']
+    };
+    channels.push(aChannel);
+  });
+
   return channels;
 }
 
