@@ -1,12 +1,14 @@
 # SOEN341-project
 
+[![Build Status](https://travis-ci.com/gpnn/soen341-project.svg?token=k8zgsLd2PutjdAoQXZYy&branch=master)](https://travis-ci.com/gpnn/soen341-project)
+
 ## Description
 
-Develop a Slack clone web app using the languages/frameworks of our choice.
+This is a clone of the Slack web application. Developed using a MERN stack. Basic features such as creating channels, joining channels and sending messages in channels. More features to come...
 
 ## Objective
 
-Purpose of the project is to demonstrate the importance and application of the software process.
+Purpose of the project is to demonstrate the importance and application of the software process. As well as develop our hard and soft skills, such as ones to work collaboratively in a team.
 
 ## Core features
 There are three core features: 
@@ -15,9 +17,9 @@ There are three core features:
 *  Users must be able to join channels
 *  Users must be able to send messages in channels
 
-## Getting Started
+# Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
@@ -26,20 +28,20 @@ Make sure to have node installed https://nodejs.org/en/
 ### Installing
 
 * Clone the repository.
-* CD into the folder path \soen341-project
-* Open up a command line and run 'npm i'
-* CD \soen341-project\client and run 'npm i'
-* CD \soen341-project\backend and run 'npm i'
-* CD ..to go up a directory (back to \soen341-project)
-* Next run 'npm start' to start both the front end and server at the same time
+* From the project directory, run the following command to install the dependencies
+````bash
+npm run installall
+````
+* Run the following command to start both the client and back-end of the project
+````bash
+npm run start
+````
+
+Note that you must have authentication data to the MongoDB instance to manipulate the data. Contact [Mackbellemore](https://github.com/Mackbellemore/) for more information about that.
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Explain how to run the automated tests for this web application
 
 ## Built With
 
@@ -50,7 +52,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Contributing
 
-Please read CONTRIBUTING.md for details on our code of conduct, and the process for submitting pull requests to us.
+Describe how others can contribute to this project
 
 ## Authors
 
@@ -64,6 +66,10 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details
+Define a license for this project
 
 ## Acknowledgments
+
+List of humans that helped us with this project
+
+## Project status
