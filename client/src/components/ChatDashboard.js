@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import ChatRoom from "./ChatRoom";
 import ChannelList from "./ChannelList";
 import AddChannelForm from "./AddChannelForm";
-
 import { addChannels, getChannels } from "../api/channels";
-import Modal from "./Modal";
+import InviteModal from "./InviteModal";
+
+
 
 export default class ChatDashboard extends Component {
   constructor(props) {
@@ -22,7 +23,6 @@ export default class ChatDashboard extends Component {
     this.addChannel = this.addChannel.bind(this);
     this.deleteChannel = this.deleteChannel.bind(this);
   }
-
   componentDidMount() {
     console.log(this.props.user);
     // fetch all the channels then set state
@@ -89,9 +89,13 @@ export default class ChatDashboard extends Component {
                   messages={this.getChannelMessages}
                 />
               )}
-              <Modal />
+
+            </div>
+            <div className="gang">
+            <InviteModal/>
             </div>
           </div>
+
         </div>
         <div className="row">
           <AddChannelForm
