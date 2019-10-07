@@ -121,7 +121,7 @@ exports.update = (req, res) => {
 };
 
 exports.findByIdAndAddChannelId = (userId, channelId) => {
-  User.findOneAndUpdate(userId, {$push: {channelIDs: channelId}})
+  User.findOneAndUpdate({_id: userId}, {$push: {channelIDs: channelId}}, {new: true})
     .then(user => {
       if (!user) {
         console.log("no user found with that id")
