@@ -298,3 +298,7 @@ typings/
 .idea/soen341-project.iml
 .idea/sonarlint/
 .idea/vcs.xml
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/jsLibraryMappings.xml
+/.idea/pylint.xml
+/.idea/saveactions_settings.xml

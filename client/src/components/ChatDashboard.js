@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import ChatRoom from './ChatRoom';
 import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
-import {addChannels, getChannels} from '../api/channels'
+import {addChannels, getChannelsForUser} from '../api/channels'
 
 export default class ChatDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      channels: [{name: 'channel1', id: 1}, {name: 'channel2', id: 2}],
+      channels: [],
       user: this.props.user,
       channelMessages: [],
       channelSelected: ''
@@ -26,9 +26,9 @@ export default class ChatDashboard extends Component {
     this.loadChannels();
   }
 
-  loadChannels() {
-    getChannels()
-    // some logic to populate the channels array in the constructor
+  async loadChannels() {
+    let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
+    this.setState({channels: loadedChannels});
   }
 
   selectChannel(channelId) {
@@ -80,12 +80,12 @@ export default class ChatDashboard extends Component {
               {!this.state.channelSelected ? (
                 <div>Please select a channel</div>
               ) : (
-                  <ChatRoom
-                    channel={this.state.channelSelected}
-                    user={this.state.user}
-                    messages={this.getChannelMessages}
-                  />
-                )}
+                <ChatRoom
+                  channel={this.state.channelSelected}
+                  user={this.state.user}
+                  messages={this.getChannelMessages}
+                />
+              )}
             </div>
           </div>
         </div>
