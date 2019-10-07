@@ -1,11 +1,22 @@
 import axios from "axios";
 
 export async function getChannels() {
-  const channelsArray = [];
+  const rawResponse = [];
   await axios.get('/channels').then(response => {
-    channelsArray.push(response.data);
+    rawResponse.push(response.data);
   });
-  return channelsArray;
+
+  let channels = [];
+  rawResponse[0].forEach(channel => {
+    let aChannel = {
+      name: channel['name'],
+      id: channel['_id']
+    };
+    channels.push(aChannel);
+  });
+
+  console.log(channels);
+  return channels;
 }
 
 export async function addChannels(name, id) {

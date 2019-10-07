@@ -9,7 +9,7 @@ export default class ChatDashboard extends Component {
     super(props);
 
     this.state = {
-      channels: [{name: 'channel1', id: 1}, {name: 'channel2', id: 2}],
+      channels: [],
       user: this.props.user,
       channelMessages: [],
       channelSelected: ''
@@ -26,9 +26,12 @@ export default class ChatDashboard extends Component {
     this.loadChannels();
   }
 
-  loadChannels() {
-    getChannels()
-    // some logic to populate the channels array in the constructor
+  async loadChannels() {
+    let loadedChannels = [];
+    loadedChannels = Array.from(await getChannels());
+    this.setState({channels: loadedChannels});
+    // this.state.channels = getChannels();
+    // getChannels();
   }
 
   selectChannel(channelId) {
@@ -80,12 +83,12 @@ export default class ChatDashboard extends Component {
               {!this.state.channelSelected ? (
                 <div>Please select a channel</div>
               ) : (
-                  <ChatRoom
-                    channel={this.state.channelSelected}
-                    user={this.state.user}
-                    messages={this.getChannelMessages}
-                  />
-                )}
+                <ChatRoom
+                  channel={this.state.channelSelected}
+                  user={this.state.user}
+                  messages={this.getChannelMessages}
+                />
+              )}
             </div>
           </div>
         </div>
