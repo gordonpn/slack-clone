@@ -21,6 +21,7 @@ code {
   height: 400px;
   max-height: 300%;
   overflow: auto;
+
 }
 
 .testy {
@@ -43,7 +44,20 @@ code {
 }
 
 .modalbutton {
-  left: 510px;
+  left:550px;
   position: relative;
+  bottom:55px;
 
+
+}
+.messageBar{
+  margin-top: 325px;
+  position:relative;
+  width: 82%;
+  right: 100px
+
+}
+
+.input {
+  width: 30%;
 }

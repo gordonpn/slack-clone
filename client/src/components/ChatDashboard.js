@@ -3,7 +3,7 @@ import ChatRoom from './ChatRoom';
 import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
 import {addChannels, getChannelsForUser} from '../api/channels'
-import InviteModal from "./InviteModal";
+
 
 export default class ChatDashboard extends Component {
   constructor(props) {
@@ -88,9 +88,7 @@ export default class ChatDashboard extends Component {
                 />
               )}
             </div>
-            <div className="modalbutton">
-              <InviteModal/>
-            </div>
+
           </div>
         </div>
         <div className="row">
