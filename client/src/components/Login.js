@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 export default class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: "",
       loginPage: true,
       signUpPage: false
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.enableSignUpPage = this.enableSignUpPage.bind(this);
@@ -59,7 +59,7 @@ export default class Login extends Component {
     return (
       <div className="col-sm">
         <h3>Login Page</h3>
-        <br></br>
+        <br/>
         <form>
           <label>
             username:
@@ -79,7 +79,7 @@ export default class Login extends Component {
     return (
       <div className="col-sm">
         <h3>Sign Up Page</h3>
-        <br></br>
+        <br/>
         <form>
           <label>
             username:

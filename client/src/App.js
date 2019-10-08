@@ -20,7 +20,7 @@ export default class App extends Component {
 
   async setUser(userName) {
     try {
-      const response = await await addUser(userName);
+      const response = await addUser(userName);
       if (response.data) {
         alert(`Thank you for signing up, please login with your username: ${userName}`);
       }
@@ -42,7 +42,7 @@ export default class App extends Component {
         id: response.data[0]._id,
         friendIDs: response.data[0].friendIDs,
         channelIDs: response.data[0].channelIDs
-      }
+      };
       this.setState({
         user: newUser,
         isLoggedIn: true
