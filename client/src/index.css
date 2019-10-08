@@ -46,3 +46,7 @@ code {
   float: right;
   margin-top: -45px;
 }
+
+.channels h3 {
+  text-align: center;
+}
