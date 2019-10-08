@@ -8,8 +8,8 @@ import "./index.css";
 export default class App extends Component {
   constructor() {
     super();
-    const isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false;
-    const user = localStorage.getItem('user');
+    const isLoggedIn = window.sessionStorage.getItem('isLoggedIn') ? true : false;
+    const user = window.sessionStorage.getItem('user');
     this.state = {
       user: JSON.parse(user) || {username: "", id: "", friendIDs: [], channelIDs: []},
       isLoggedIn: isLoggedIn,
@@ -49,8 +49,8 @@ export default class App extends Component {
         user: newUser,
         isLoggedIn: true
       })
-      localStorage.setItem('isLoggedIn', this.state.isLoggedIn);
-      localStorage.setItem('user', JSON.stringify(this.state.user));
+      window.sessionStorage.setItem('isLoggedIn', this.state.isLoggedIn);
+      window.sessionStorage.setItem('user', JSON.stringify(this.state.user));
     } catch (error) {
       console.log(error);
       return;
