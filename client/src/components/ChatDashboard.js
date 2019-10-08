@@ -21,7 +21,6 @@ export default class ChatDashboard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.user);
     // fetch all the channels then set state
     this.loadChannels();
   }
@@ -43,11 +42,15 @@ export default class ChatDashboard extends Component {
     try {
       const channelId = await addChannels(name, this.props.user.id);
       const newElement = {name: name, id: channelId};
+      const newUser = {...this.state.user};
+      newUser.channelIDs.push(channelId);
       this.setState(prevState => ({
-        channels: [...prevState.channels, newElement]
+        channels: [...prevState.channels, newElement],
+        user: newUser
       }));
+      localStorage.setItem('user', JSON.stringify(this.state.user));
     } catch (error) {
-      console.log("cannot add this channel"); // handle this better in future issue
+      console.log(error); // handle this better in future issue
     }
   }
 
