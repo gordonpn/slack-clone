@@ -8,30 +8,16 @@ import "./index.css";
 export default class App extends Component {
   constructor() {
     super();
+    const isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false;
+    const user = localStorage.getItem('user');
     this.state = {
-      user: {username: "", id: "", friendIDs: [], channelIDs: []},
-      isLoggedIn: false,
+      user: JSON.parse(user) || {username: "", id: "", friendIDs: [], channelIDs: []},
+      isLoggedIn: isLoggedIn,
       isLoading: false
     };
     this.setUser = this.setUser.bind(this);
     this.logUserIn = this.logUserIn.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
-  }
-  async componentDidMount() {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') ? true : false;
-    if (isLoggedIn) {
-      try {
-        let userName = localStorage.getItem('userName');
-        let user = await this.getUser(userName);
-
-        this.setState({
-          isloggedIn: true,
-          user: user
-        })
-      } catch (err) {
-        console.log(err);
-      }
-    }
   }
 
   async setUser(userName) {
@@ -48,27 +34,6 @@ export default class App extends Component {
 
   async logUserIn(userName) {
     try {
-      const user = await this.getUser(userName)
-      this.setState({
-        user: user,
-        isLoggedIn: true
-      })
-      localStorage.setItem('isLoggedIn', this.state.isLoggedIn);
-      localStorage.setItem('userName', JSON.stringify(this.state.user.username));
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-  }
-  logOutUser() {
-    this.setState({
-      isLoggedIn: false
-    })
-    localStorage.clear();
-  }
-
-  async getUser(userName) {
-    try {
       const response = await getUserByName(userName);
       if (response.data.length === 0) {
         console.log("invalid username");
@@ -80,10 +45,22 @@ export default class App extends Component {
         friendIDs: response.data[0].friendIDs,
         channelIDs: response.data[0].channelIDs
       }
-      return newUser;
-    } catch (err) {
-      throw err;
+      this.setState({
+        user: newUser,
+        isLoggedIn: true
+      })
+      localStorage.setItem('isLoggedIn', this.state.isLoggedIn);
+      localStorage.setItem('user', JSON.stringify(this.state.user));
+    } catch (error) {
+      console.log(error);
+      return;
     }
+  }
+  logOutUser() {
+    this.setState({
+      isLoggedIn: false
+    })
+    localStorage.clear();
   }
   render() {
     return (
