@@ -67,12 +67,14 @@ export default class App extends Component {
       <div className="container-fluid">
         <div className="jumbotron-fluid" align="center">
           <h1>Slack Clone App</h1>
-          <Button
-            type="button"
-            className="logoutButton btn btn-secondary"
-            onClick={this.logOutUser}>
-            Log out
+          {this.state.isLoggedIn &&
+            <Button
+              type="button"
+              className="logoutButton btn btn-secondary"
+              onClick={this.logOutUser}>
+              Log out
           </Button>
+          }
         </div>
         {!this.state.isLoggedIn ? (
           <Login logUserIn={this.logUserIn} setUser={this.setUser} />
