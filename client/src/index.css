@@ -41,3 +41,12 @@ code {
   margin: 10px;
   padding: 10px;
 }
+
+.logoutButton {
+  float: right;
+  margin-top: -45px;
+}
+
+.channels h3 {
+  text-align: center;
+}

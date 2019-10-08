@@ -1,25 +1,28 @@
-import React, { Component } from "react";
-//import axios from "axios";
+import React, {Component} from "react";
 import ChatDashboard from "./components/ChatDashboard";
 import Login from "./components/Login";
-import { getUserByName, addUser } from "./api/users"
+import {getUserByName, addUser} from "./api/users";
+import Button from "react-bootstrap/Button";
 import "./index.css";
 
 export default class App extends Component {
   constructor() {
     super();
+    const isLoggedIn = window.sessionStorage.getItem('isLoggedIn') ? true : false;
+    const user = window.sessionStorage.getItem('user');
     this.state = {
-      user: { username: "", id: "", friendIDs: [], channelIDs: [] },
-      isLoggedIn: false,
+      user: JSON.parse(user) || {username: "", id: "", friendIDs: [], channelIDs: []},
+      isLoggedIn: isLoggedIn,
       isLoading: false
     };
     this.setUser = this.setUser.bind(this);
     this.logUserIn = this.logUserIn.bind(this);
+    this.logOutUser = this.logOutUser.bind(this);
   }
 
   async setUser(userName) {
     try {
-      const response = await await addUser(userName);
+      const response = await addUser(userName);
       if (response.data) {
         alert(`Thank you for signing up, please login with your username: ${userName}`);
       }
@@ -46,17 +49,32 @@ export default class App extends Component {
         user: newUser,
         isLoggedIn: true
       })
+      window.sessionStorage.setItem('isLoggedIn', this.state.isLoggedIn);
+      window.sessionStorage.setItem('user', JSON.stringify(this.state.user));
     } catch (error) {
       console.log(error);
       return;
     }
   }
-
+  logOutUser() {
+    this.setState({
+      isLoggedIn: false
+    })
+    sessionStorage.clear();
+  }
   render() {
     return (
       <div className="container-fluid">
-        <div className="jumbotron-fluid">
+        <div className="jumbotron-fluid" align="center">
           <h1>Slack Clone App</h1>
+          {this.state.isLoggedIn &&
+            <Button
+              type="button"
+              className="logoutButton btn btn-secondary"
+              onClick={this.logOutUser}>
+              Log out
+          </Button>
+          }
         </div>
         {!this.state.isLoggedIn ? (
           <Login logUserIn={this.logUserIn} setUser={this.setUser} />
