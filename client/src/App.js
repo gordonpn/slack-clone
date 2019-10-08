@@ -60,7 +60,7 @@ export default class App extends Component {
     this.setState({
       isLoggedIn: false
     })
-    localStorage.clear();
+    sessionStorage.clear();
   }
   render() {
     return (
