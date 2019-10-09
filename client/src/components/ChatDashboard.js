@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ChatRoom from './ChatRoom';
 import AddChannelForm from './AddChannelForm';
 import ChannelList from './ChannelList';
-import { addChannels, getChannelsForUser } from '../api/channels';
+import {addChannels, getChannelsForUser} from '../api/channels';
 
 export default class ChatDashboard extends Component {
   constructor(props) {
@@ -32,11 +32,11 @@ export default class ChatDashboard extends Component {
 
   async loadChannels() {
     let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
-    this.setState({ channels: loadedChannels });
+    this.setState({channels: loadedChannels});
   }
 
   selectChannel(channelId) {
-    this.setState({ channelSelected: channelId });
+    this.setState({channelSelected: channelId});
   }
 
   async addChannel(e, name) {
@@ -46,8 +46,8 @@ export default class ChatDashboard extends Component {
     // post to db with new channel name and set state with the new channelId
     try {
       const channelId = await addChannels(name, this.props.user.id);
-      const newElement = { name: name, id: channelId };
-      const newUser = { ...this.state.user };
+      const newElement = {name: name, id: channelId};
+      const newUser = {...this.state.user};
       newUser.channelIDs.push(channelId);
       this.setState(prevState => ({
         channels: [...prevState.channels, newElement],
@@ -96,15 +96,15 @@ export default class ChatDashboard extends Component {
             </div>
           </div>
           <div className="col-sm-9 rightCol">
-              {!this.state.channelSelected ? (
-                <div align="center">Please select a channel</div>
-              ) : (
-                    <ChatRoom
-                      channel={this.state.channelSelected}
-                      user={this.state.user}
-                      messages={this.getChannelMessages}
-                    />
-                )}
+            {!this.state.channelSelected ? (
+              <div align="center">Please select a channel</div>
+            ) : (
+                <ChatRoom
+                  channel={this.state.channelSelected}
+                  user={this.state.user}
+                  messages={this.getChannelMessages}
+                />
+              )}
           </div>
         </div>
       </div>

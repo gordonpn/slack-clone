@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Button from "react-bootstrap/Button";
 import ClipLoader from 'react-spinners/ClipLoader';
 import {css} from '@emotion/core';
@@ -18,13 +18,13 @@ export default class ChannelList extends Component {
       <div>
         <div className="row">
           <div className="col-md-12 channellist">
-          <ClipLoader
-                css={override}
-                sizeUnit={"px"}
-                size={100}
-                //color={'#007bff'}
-                loading={this.props.isLoadingChannels}
-              />
+            <ClipLoader
+              css={override}
+              sizeUnit={"px"}
+              size={100}
+              //color={'#007bff'}
+              loading={this.props.isLoadingChannels}
+            />
             <ul
               style={{
                 listStyleType: "none",
@@ -34,7 +34,7 @@ export default class ChannelList extends Component {
               {this.props.channels.map(channel => {
                 return (
                   <li
-                    style={{ paddingBottom: "5px" }}
+                    style={{paddingBottom: "5px"}}
                     key={channel.id}
                     value={channel.name}
                   >

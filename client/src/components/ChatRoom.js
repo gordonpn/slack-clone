@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 export default class ChatRoom extends Component {
   render() {
@@ -10,13 +10,13 @@ export default class ChatRoom extends Component {
           </div>
           <div className="row">
             <div className="col-md-12 messageBox">
-            Message Box
+              Message Box
             </div>
           </div>
         </div>
         <div className="col-md-4 inviteModal" align="center">
           Invite Modal / User List
-          </div>
+        </div>
       </div>
 
     )
