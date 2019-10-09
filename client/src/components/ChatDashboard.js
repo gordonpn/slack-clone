@@ -78,7 +78,7 @@ export default class ChatDashboard extends Component {
           <div className="col-sm-3 leftCol">
             <div className="row">
               <div className="col-sm-12 chanelListTitle" align="center">
-                <h3>Channels</h3>
+                <h4>Channels</h4>
               </div>
             </div>
             <ChannelList

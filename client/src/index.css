@@ -70,14 +70,14 @@ code {
 }
 
 .messageBox {
-  height: 90vh;
+  height: 88vh;
   background-color: lightslategray;
   padding-top: 40px;
 }
 
 .chatRoomTitle {
   background-color: aliceblue;
-  height: 4vh;
+  height: 6vh;
 }
 
 .inviteModal {
@@ -87,5 +87,6 @@ code {
 }
 
 .chanelListTitle {
-  height: 4vh;
+  height: 6vh;
+  padding-top: 1vh;
 }
