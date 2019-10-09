@@ -1,16 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ChatRoom from './ChatRoom';
-import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
-import {addChannels, getChannelsForUser} from '../api/channels';
-import ClipLoader from 'react-spinners/ClipLoader';
-import {css} from '@emotion/core';
-
-const override = css`
-display: block;
-margin: 0 auto;
-border-color: #007bff;
-`;
+import ChannelList from './ChannelList';
+import { addChannels, getChannelsForUser } from '../api/channels';
 
 export default class ChatDashboard extends Component {
   constructor(props) {
@@ -40,11 +32,11 @@ export default class ChatDashboard extends Component {
 
   async loadChannels() {
     let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
-    this.setState({channels: loadedChannels});
+    this.setState({ channels: loadedChannels });
   }
 
   selectChannel(channelId) {
-    this.setState({channelSelected: channelId});
+    this.setState({ channelSelected: channelId });
   }
 
   async addChannel(e, name) {
@@ -54,8 +46,8 @@ export default class ChatDashboard extends Component {
     // post to db with new channel name and set state with the new channelId
     try {
       const channelId = await addChannels(name, this.props.user.id);
-      const newElement = {name: name, id: channelId};
-      const newUser = {...this.state.user};
+      const newElement = { name: name, id: channelId };
+      const newUser = { ...this.state.user };
       newUser.channelIDs.push(channelId);
       this.setState(prevState => ({
         channels: [...prevState.channels, newElement],
@@ -82,42 +74,38 @@ export default class ChatDashboard extends Component {
   render() {
     return (
       <div>
-        <div className="row dash">
-          <div className="col-sm-3 channellist">
-            <div className="channels">
-              <h3>Channels</h3>
-              <ClipLoader
-                css={override}
-                sizeUnit={"px"}
-                size={100}
-                //color={'#007bff'}
-                loading={this.state.isLoadingChannels}
-              />
-              <ChannelList
-                channels={this.state.channels}
-                selectChannel={this.selectChannel}
-              />
-            </div>
-          </div>
-          <div className="col-sm-9" align="center">
-            <div className="chatRoom">
-              {!this.state.channelSelected ? (
-                <div>Please select a channel</div>
-              ) : (
-                  <ChatRoom
-                    channel={this.state.channelSelected}
-                    user={this.state.user}
-                    messages={this.getChannelMessages}
-                  />
-                )}
-            </div>
-          </div>
-        </div>
         <div className="row">
-          <AddChannelForm
-            deleteChannel={this.deleteChannel}
-            addChannel={this.addChannel}
-          />
+          <div className="col-sm-3 leftCol">
+            <div className="row">
+              <div className="col-sm-12 chanelListTitle" align="center">
+                <h3>Channels</h3>
+              </div>
+            </div>
+            <ChannelList
+              isLoadingChannels={this.state.isLoadingChannels}
+              channels={this.state.channels}
+              selectChannel={this.selectChannel}
+            />
+            <div className="row">
+              <div className="col-sm-12 channelForm">
+                <AddChannelForm
+                  deleteChannel={this.deleteChannel}
+                  addChannel={this.addChannel}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-9 rightCol">
+              {!this.state.channelSelected ? (
+                <div align="center">Please select a channel</div>
+              ) : (
+                    <ChatRoom
+                      channel={this.state.channelSelected}
+                      user={this.state.user}
+                      messages={this.getChannelMessages}
+                    />
+                )}
+          </div>
         </div>
       </div>
     );
