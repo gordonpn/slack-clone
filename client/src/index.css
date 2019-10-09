@@ -16,24 +16,13 @@ code {
   text-align: center;
 }
 
-.chatRoom {
-  background-color: beige;
-  height: 400px;
-  max-height: 300%;
-  overflow: auto;
-
-}
-
-.testy {
-  display: block;
-}
-
 .channellist {
-  background-color: aliceblue;
-  height: 300px;
-  max-height: 300px;
+  background-color: rgba(211, 211, 211, 0.726);
+  height: 70vh;
   overflow: auto;
+  padding-top: 5px;
 }
+
 
 .submitButton {
   background-color: #DDDDDD;
@@ -43,21 +32,69 @@ code {
   padding: 10px;
 }
 
-.modalbutton {
-  left:550px;
-  position: relative;
-  bottom:55px;
-
-
-}
-.messageBar{
-  margin-top: 325px;
-  position:relative;
-  width: 82%;
-  right: 100px
-
+.logoutButton {
+  float: right;
+  margin-top: -45px;
 }
 
-.input {
-  width: 30%;
+.channels h3 {
+  text-align: center;
+}
+
+.leftCol {
+  height: 94vh;
+  background-color: rgba(32,34,37,.6);
+}
+
+.rightCol {
+  background-color: rgb(134, 133, 130);
+  height: 94vh;
+}
+
+.btn-primary {
+  background-color: rgb(65, 64, 62) !important;
+  border-color: black !important;
+  /*text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;*/
+}
+
+.btn-primary:hover {
+  background-color: black !important;
+}
+
+.btn-primary:visited {
+  background-color: darkgrey;
+}
+
+.btn-create {
+  margin-top: 10px;
+}
+
+.channelForm {
+  margin-top: 10px;
+}
+
+.messageBox {
+  height: 88vh;
+  background-color: lightslategray;
+  padding-top: 40px;
+}
+
+.chatRoomTitle {
+  background-color: aliceblue;
+  height: 6vh;
+}
+
+.inviteModal {
+  height: 94vh;
+  background-color: lightsteelblue;
+  padding-top: 40px;
+}
+
+.chanelListTitle {
+  height: 6vh;
+  padding-top: 1vh;
+}
+
+.mb-3 {
+  margin-top: 65vh;
 }

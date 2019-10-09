@@ -1,17 +1,25 @@
-import React, { Component } from 'react'
-import InviteModal from "./InviteModal";
-import MessageBox from "./MessageBox";
+import React, {Component} from 'react';
+import MessageBox from './MessageBox';
+import InviteModal from './InviteModal';
 export default class ChatRoom extends Component {
-	render() {
-		return <div>
-      <div>Chat Room {this.props.channel}</div>
-     <div className="messageBar">
-       <div className="col-xs-2">
-       <MessageBox/>
-       </div>
+  render() {
+    return (
+      <div className="row">
+        <div className="col-md-8" align="center">
+          <div className="row">
+            <div className="col-md-12 chatRoomTitle">Chat Room {this.props.channel}</div>
+          </div>
+          <div className="row">
+            <div className="col-md-12 messageBox">
+              <MessageBox />
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4 inviteModal" align="center">
+          <InviteModal />
+        </div>
       </div>
-      <div className="modalbutton"><InviteModal/></div>
 
-    </div>
-	}
+    )
+  }
 }

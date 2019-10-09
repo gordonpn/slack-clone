@@ -131,8 +131,10 @@ exports.findByIdAndAddChannelId = (userId, channelId) => {
     .catch(err => {
       if (err.kind === 'ObjectId') {
         console.log('User not found with id (objectID error)');
+        throw err;
       }
       console.log('Error updating user with id', userId);
+      throw err;
     });
 }
 // Delete a user with the specified userId in the request

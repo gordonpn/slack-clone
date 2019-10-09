@@ -31,9 +31,8 @@ export default class InviteModal extends Component {
 
   sendInvite(e) {
     e.preventDefault();
-    this.setState({username: this.state.username});
     console.log(`Attempting to send invite to ${this.state.username}`);
-    this.setState({show: false})
+    this.setState({show: true, username: ""})
   }
 
   render() {
@@ -50,14 +49,14 @@ export default class InviteModal extends Component {
             </Modal.Header>
             <Modal.Body>
               Search For User <input type="text" value={this.state.username}
-                                     onChange={this.handleChange}/>
+                onChange={this.handleChange} />
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
                 Close
               </Button>
               <Button onClick={e => this.sendInvite(e)}
-                      disabled={!this.state.username}>
+                disabled={!this.state.username}>
                 Invite This User
               </Button>
               {/*<h1>{this.state.username}</h1>*/}

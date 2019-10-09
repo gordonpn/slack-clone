@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ChatRoom from './ChatRoom';
-import ChannelList from './ChannelList';
 import AddChannelForm from './AddChannelForm';
-import {addChannels, getChannelsForUser} from '../api/channels'
+import ChannelList from './ChannelList';
+import {addChannels, getChannelsForUser} from '../api/channels';
 
 
 export default class ChatDashboard extends Component {
@@ -13,7 +13,8 @@ export default class ChatDashboard extends Component {
       channels: [],
       user: this.props.user,
       channelMessages: [],
-      channelSelected: ''
+      channelSelected: '',
+      isLoadingChannels: true
     };
 
     this.selectChannel = this.selectChannel.bind(this);
@@ -22,9 +23,12 @@ export default class ChatDashboard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.user);
     // fetch all the channels then set state
-    this.loadChannels();
+    this.loadChannels().then(() => {
+      this.setState({
+        isLoadingChannels: false
+      })
+    });
   }
 
   async loadChannels() {
@@ -44,11 +48,15 @@ export default class ChatDashboard extends Component {
     try {
       const channelId = await addChannels(name, this.props.user.id);
       const newElement = {name: name, id: channelId};
+      const newUser = {...this.state.user};
+      newUser.channelIDs.push(channelId);
       this.setState(prevState => ({
-        channels: [...prevState.channels, newElement]
+        channels: [...prevState.channels, newElement],
+        user: newUser
       }));
+      sessionStorage.setItem('user', JSON.stringify(this.state.user));
     } catch (error) {
-      console.log("cannot add this channel"); // handle this better in future issue
+      console.log(error); // handle this better in future issue
     }
   }
 
@@ -67,37 +75,39 @@ export default class ChatDashboard extends Component {
   render() {
     return (
       <div>
-        <div className="row dash">
-          <div className="col-sm-3 channellist">
-            <div className="channels">
-              <ChannelList
-                channels={this.state.channels}
-                selectChannel={this.selectChannel}
-              />
+        <div className="row">
+          <div className="col-sm-3 leftCol">
+            <div className="row">
+              <div className="col-sm-12 chanelListTitle" align="center">
+                <h4>Channels</h4>
+              </div>
+            </div>
+            <ChannelList
+              isLoadingChannels={this.state.isLoadingChannels}
+              channels={this.state.channels}
+              selectChannel={this.selectChannel}
+            />
+            <div className="row">
+              <div className="col-sm-12 channelForm">
+                <AddChannelForm
+                  deleteChannel={this.deleteChannel}
+                  addChannel={this.addChannel}
+                />
+              </div>
             </div>
           </div>
-          <div className="col-sm-9" align="center">
-            <div className="chatRoom">
-              {!this.state.channelSelected ? (
-                <div>Please select a channel</div>
-              ) : (
+          <div className="col-sm-9 rightCol">
+            {!this.state.channelSelected ? (
+              <div align="center">Please select a channel</div>
+            ) : (
                 <ChatRoom
                   channel={this.state.channelSelected}
                   user={this.state.user}
                   messages={this.getChannelMessages}
                 />
               )}
-            </div>
-
           </div>
         </div>
-        <div className="row">
-          <AddChannelForm
-            deleteChannel={this.deleteChannel}
-            addChannel={this.addChannel}
-          />
-        </div>
-
       </div>
     );
   }
