@@ -54,7 +54,7 @@ code {
 .btn-primary {
   background-color: rgb(65, 64, 62) !important;
   border-color: black !important;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  /*text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;*/
 }
 
 .btn-primary:hover {
@@ -63,6 +63,10 @@ code {
 
 .btn-primary:visited {
   background-color: darkgrey;
+}
+
+.btn-create {
+  margin-top: 10px;
 }
 
 .channelForm {

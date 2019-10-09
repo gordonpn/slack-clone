@@ -28,7 +28,7 @@ export default class AddChannelForm extends Component {
         />
         <Button
           type="submit"
-          className="btn btn-primary btn-block"
+          className="btn btn-primary btn-block btn-create"
           disabled={!this.state.channelName}
           onClick={e => this.props.addChannel(e, this.state.channelName)}
         >
