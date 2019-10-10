@@ -33,11 +33,11 @@ export default class InviteModal extends Component {
 
   async sendInvite(e) {
     e.preventDefault();
-    console.log(`Attempting to send invite to ${this.state.username}`);
     try {
       const response = await updateUserChannel(this.state.username, this.props.channelId);
       if (response.status === 200) {
-        this.setState({show: false});
+        console.log(`invite sent to ${this.state.username}`);
+        this.setState({show: false, username: ""});
       }
     } catch (error) {
       if (error.response.status === 404) {
