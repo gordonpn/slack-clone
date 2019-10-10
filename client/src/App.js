@@ -8,7 +8,7 @@ import "./index.css";
 export default class App extends Component {
   constructor() {
     super();
-    const isLoggedIn = window.sessionStorage.getItem('isLoggedIn') ? true : false;
+    const isLoggedIn = !!window.sessionStorage.getItem('isLoggedIn');
     const user = window.sessionStorage.getItem('user');
     this.state = {
       user: JSON.parse(user) || {username: "", id: "", friendIDs: [], channelIDs: []},
@@ -44,11 +44,11 @@ export default class App extends Component {
         id: response.data[0]._id,
         friendIDs: response.data[0].friendIDs,
         channelIDs: response.data[0].channelIDs
-      }
+      };
       this.setState({
         user: newUser,
         isLoggedIn: true
-      })
+      });
       window.sessionStorage.setItem('isLoggedIn', this.state.isLoggedIn);
       window.sessionStorage.setItem('user', JSON.stringify(this.state.user));
     } catch (error) {
@@ -59,7 +59,7 @@ export default class App extends Component {
   logOutUser() {
     this.setState({
       isLoggedIn: false
-    })
+    });
     sessionStorage.clear();
   }
   render() {

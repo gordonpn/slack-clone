@@ -2,8 +2,7 @@ import axios from "axios";
 
 export async function getUserByName(userName) {
   try {
-    const response = await axios.get(`/users/username/${userName}`);
-    return response;
+    return await axios.get(`/users/username/${userName}`);
   } catch (error) {
     throw error;
   }
