@@ -59,7 +59,7 @@ export default class Login extends Component {
     return (
       <div className="col-sm">
         <h3>Login Page</h3>
-        <br></br>
+        <br/>
         <form>
           <label>
             username:
@@ -79,7 +79,7 @@ export default class Login extends Component {
     return (
       <div className="col-sm">
         <h3>Sign Up Page</h3>
-        <br></br>
+        <br/>
         <form>
           <label>
             username:

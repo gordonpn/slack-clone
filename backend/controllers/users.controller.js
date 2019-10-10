@@ -136,7 +136,7 @@ exports.findByIdAndAddChannelId = (userId, channelId) => {
       console.log('Error updating user with id', userId);
       throw err;
     });
-}
+};
 // Delete a user with the specified userId in the request
 exports.delete = (req, res) => {
   User.findByIdAndRemove(req.params.userId)

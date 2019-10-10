@@ -11,7 +11,7 @@ module.exports = app => {
   app.get('/users/:userId', users.findById);
 
   //Retrieve a user by name
-  app.get('/users/username/:username', users.findByName)
+  app.get('/users/username/:username', users.findByName);
 
   // Update a User with userId
   app.put('/users/:userId', users.update);
