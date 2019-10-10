@@ -152,7 +152,7 @@ exports.updateChannels = (req, res) => {
   });
 
 
-}
+};
 
 exports.findByIdAndAddChannelId = (userId, channelId) => {
   User.findOneAndUpdate({_id: userId}, {$push: {channelIDs: channelId}}, {new: true})
