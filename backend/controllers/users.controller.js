@@ -120,6 +120,40 @@ exports.update = (req, res) => {
     });
 };
 
+exports.updateChannels = (req, res) => {
+  if (!req.body.channelId || !req.params.username) {
+    return res.status(400).send({
+      message: 'body must have a userId and channelId'
+    });
+  }
+
+  User.findOneAndUpdate({username: req.params.username}, {$addToSet: {channelIDs: req.body.channelId}}, {new: true})
+  .then(user => {
+    if (!user) {
+      return res.status(404).send({
+        message: 'No user found with that Id'
+      });
+    }
+    return res.status(200).send({
+      message: 'Success'
+    })
+  })
+  .catch(err => {
+    if (err.kind === 'ObjectId') {
+      console.log('User not found with id (objectID error)');
+      res.status(405).send({
+        message: "User not found with id (objectID error)"
+      });
+    }
+    console.log('Error updating user with id');
+    res.status(405).send({
+      message: "User not found with that id"
+    });
+  });
+
+
+};
+
 exports.findByIdAndAddChannelId = (userId, channelId) => {
   User.findOneAndUpdate({_id: userId}, {$push: {channelIDs: channelId}}, {new: true})
     .then(user => {
@@ -136,7 +170,7 @@ exports.findByIdAndAddChannelId = (userId, channelId) => {
       console.log('Error updating user with id', userId);
       throw err;
     });
-}
+};
 // Delete a user with the specified userId in the request
 exports.delete = (req, res) => {
   User.findByIdAndRemove(req.params.userId)

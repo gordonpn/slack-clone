@@ -4,6 +4,7 @@ import AddChannelForm from './AddChannelForm';
 import ChannelList from './ChannelList';
 import {addChannels, getChannelsForUser} from '../api/channels';
 
+
 export default class ChatDashboard extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +54,6 @@ export default class ChatDashboard extends Component {
         channels: [...prevState.channels, newElement],
         user: newUser
       }));
-      sessionStorage.setItem('user', JSON.stringify(this.state.user));
     } catch (error) {
       console.log(error); // handle this better in future issue
     }

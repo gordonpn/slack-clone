@@ -94,3 +94,11 @@ code {
   height: 6vh;
   padding-top: 1vh;
 }
+
+.mb-3 {
+  margin-top: 65vh;
+}
+
+.invalidUsername {
+  color: red;
+}

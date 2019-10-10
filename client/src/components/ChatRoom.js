@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-
+import MessageBox from './MessageBox';
+import InviteModal from './InviteModal';
 export default class ChatRoom extends Component {
   render() {
     return (
@@ -10,12 +11,12 @@ export default class ChatRoom extends Component {
           </div>
           <div className="row">
             <div className="col-md-12 messageBox">
-              Message Box
+              <MessageBox />
             </div>
           </div>
         </div>
         <div className="col-md-4 inviteModal" align="center">
-          Invite Modal / User List
+          <InviteModal channelId={this.props.channel}/>
         </div>
       </div>
 
