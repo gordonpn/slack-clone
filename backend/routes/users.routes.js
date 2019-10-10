@@ -17,7 +17,7 @@ module.exports = app => {
   app.put('/users/:userId', users.update);
 
   //Update a users channels
-  app.patch('/users/channels/:userId', users.updateChannels);
+  app.patch('/users/channels/:username', users.updateChannels);
 
   // Delete a User with userId
   app.delete('/users/:userId', users.delete);

@@ -121,16 +121,16 @@ exports.update = (req, res) => {
 };
 
 exports.updateChannels = (req, res) => {
-  if (!req.body.channelId || !req.params.userId) {
+  if (!req.body.channelId || !req.params.username) {
     return res.status(400).send({
       message: 'body must have a userId and channelId'
     });
   }
 
-  User.findOneAndUpdate({_id: req.params.userId}, {$addToSet: {channelIDs: req.body.channelId}}, {new: true})
+  User.findOneAndUpdate({username: req.params.username}, {$addToSet: {channelIDs: req.body.channelId}}, {new: true})
   .then(user => {
     if (!user) {
-      res.status(404).send({
+      return res.status(404).send({
         message: 'No user found with that Id'
       });
     }
@@ -145,7 +145,7 @@ exports.updateChannels = (req, res) => {
         message: "User not found with id (objectID error)"
       });
     }
-    console.log('Error updating user with id', userId);
+    console.log('Error updating user with id');
     res.status(405).send({
       message: "User not found with that id"
     });
