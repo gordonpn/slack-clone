@@ -54,7 +54,6 @@ export default class ChatDashboard extends Component {
         channels: [...prevState.channels, newElement],
         user: newUser
       }));
-      sessionStorage.setItem('user', JSON.stringify(this.state.user));
     } catch (error) {
       console.log(error); // handle this better in future issue
     }

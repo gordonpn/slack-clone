@@ -8,18 +8,45 @@ import "./index.css";
 export default class App extends Component {
   constructor() {
     super();
-    const isLoggedIn = !!window.sessionStorage.getItem('isLoggedIn');
-    const user = window.sessionStorage.getItem('user');
+    const isLoggedIn = window.sessionStorage.getItem('isLoggedIn') || false;
+    const wasLoggedIn = JSON.parse(window.sessionStorage.getItem('userName')) || false;
+
     this.state = {
-      user: JSON.parse(user) || {username: "", id: "", friendIDs: [], channelIDs: []},
+      user: {username: "", id: "", friendIDs: [], channelIDs: []},
       isLoggedIn: isLoggedIn,
-      isLoading: false
+      isLoading: false,
+      wasLoggedIn: wasLoggedIn
     };
     this.setUser = this.setUser.bind(this);
     this.logUserIn = this.logUserIn.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
   }
+  async componentDidMount() {
+    if (!this.state.wasLoggedIn) return;
 
+    try {
+      const username = this.state.wasLoggedIn;
+      const response = await getUserByName(username);
+      if (response.data.length === 0) {
+        this.setState({});
+        sessionStorage.clear();
+      }
+      const newUser = {
+        username: username,
+        id: response.data[0]._id,
+        friendIDs: response.data[0].friendIDs,
+        channelIDs: response.data[0].channelIDs
+      };
+      this.setState({
+        user: newUser,
+        isLoggedIn: true
+      });
+    } catch (error) {
+      sessionStorage.clear();
+      this.setState({});
+    }
+
+  }
   async setUser(userName) {
     try {
       const response = await addUser(userName);
@@ -50,7 +77,7 @@ export default class App extends Component {
         isLoggedIn: true
       });
       window.sessionStorage.setItem('isLoggedIn', this.state.isLoggedIn);
-      window.sessionStorage.setItem('user', JSON.stringify(this.state.user));
+      window.sessionStorage.setItem('userName', JSON.stringify(this.state.user.username));
     } catch (error) {
       console.log(error);
       return;
@@ -79,10 +106,12 @@ export default class App extends Component {
         {!this.state.isLoggedIn ? (
           <Login logUserIn={this.logUserIn} setUser={this.setUser} />
         ) : (
-            <ChatDashboard
-              user={this.state.user}
-              isloggedIn={this.state.isLoggedIn}
-            />
+            (this.state.user.username &&
+              <ChatDashboard
+                user={this.state.user}
+                isloggedIn={this.state.isLoggedIn}
+              />
+            )
           )}
       </div>
     );
