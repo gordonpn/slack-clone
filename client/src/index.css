@@ -98,3 +98,7 @@ code {
 .mb-3 {
   margin-top: 65vh;
 }
+
+.invalidUsername {
+  color: red;
+}

@@ -21,3 +21,12 @@ export async function addUser(userName) {
 
   return response;
 }
+
+export async function updateUserChannel(userName, channelId) {
+  try {
+    const response = await axios.patch(`/users/channels/${userName}`, {channelId: channelId});
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

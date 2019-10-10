@@ -16,7 +16,7 @@ export default class ChatRoom extends Component {
           </div>
         </div>
         <div className="col-md-4 inviteModal" align="center">
-          <InviteModal />
+          <InviteModal channelId={this.props.channel}/>
         </div>
       </div>
 

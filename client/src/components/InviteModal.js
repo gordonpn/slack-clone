@@ -1,13 +1,15 @@
 import Button from "react-bootstrap/Button";
 import React, {Component} from "react";
 import {Modal} from "react-bootstrap";
+import {updateUserChannel} from '../api/users';
 
 export default class InviteModal extends Component {
   constructor() {
     super();
     this.state = {
       show: false,
-      username: ''
+      username: '',
+      invalidUsername: ''
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -15,7 +17,7 @@ export default class InviteModal extends Component {
   }
 
   handleClose() {
-    this.setState({show: false})
+    this.setState({show: false, invalidUsername: false})
 
   }
 
@@ -26,13 +28,22 @@ export default class InviteModal extends Component {
   }
 
   handleChange(e) {
-    this.setState({username: e.target.value});
+    this.setState({username: e.target.value, invalidUsername: false});
   }
 
-  sendInvite(e) {
+  async sendInvite(e) {
     e.preventDefault();
     console.log(`Attempting to send invite to ${this.state.username}`);
-    this.setState({show: true, username: ""})
+    try {
+      const response = await updateUserChannel(this.state.username, this.props.channelId);
+      if (response.status === 200) {
+        this.setState({show: false});
+      }
+    } catch (error) {
+      if (error.response.status === 404) {
+        this.setState({show: true, username: "", invalidUsername: true})
+      }
+    }
   }
 
   render() {
@@ -49,7 +60,10 @@ export default class InviteModal extends Component {
             </Modal.Header>
             <Modal.Body>
               Search For User <input type="text" value={this.state.username}
-                onChange={this.handleChange} />
+                onChange={this.handleChange} placeholder={this.state.placeHolder} />
+              <div className="invalidUsername">
+                {this.state.invalidUsername && "Invalid Username"}
+              </div>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={this.handleClose}>
