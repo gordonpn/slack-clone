@@ -20,7 +20,8 @@ export async function getChannels() {
 
 export async function getChannelsForUser(ids) {
   let rawResponse = [];
-  for (let channelID of ids) {
+  // eslint-disable-next-line
+  for (const channelID of ids) {
     await axios.get(`/channel/${channelID}`).then(value => {
       rawResponse.push(value.data);
     }).catch(err => {
