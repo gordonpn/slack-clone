@@ -15,6 +15,16 @@ export default class MessageBox extends Component {
   sendMessage(e) {
     e.preventDefault();
     console.log('Message was '+ this.state.message)
+    this.props.user.sendSimpleMessage({
+      roomId: this.props.channelId,
+      text: this.state.message
+    })
+    .then(messageId => {
+      console.log("messageId: ", messageId);
+    })
+    .catch(err => {
+      console.log(err);
+    })
     this.setState({message: ""});
   }
   render() {

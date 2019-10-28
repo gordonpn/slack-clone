@@ -156,7 +156,8 @@ exports.updateChannels = (req, res) => {
       });
     }
     return res.status(200).send({
-      message: 'Success'
+      message: 'Success',
+      user: user
     })
   })
   .catch(err => {

@@ -13,6 +13,8 @@ export default class ChatDashboard extends Component {
     this.state = {
       channels: [],
       user: this.props.user,
+      chatKitUser: {},
+      chatKitRooms: [],
       channelMessages: [],
       channelSelected: '',
       isLoadingChannels: true
@@ -34,7 +36,10 @@ export default class ChatDashboard extends Component {
 
     chatManager
       .connect()
-      .then(currentUser => console.log("currentUser", currentUser))
+      .then(currentUser => {
+        this.setState({chatKitUser: currentUser})
+        console.log(this.state.chatKitUser);
+        })
       .catch(err => console.log(err));
 
     // fetch all the channels then set state
@@ -47,8 +52,11 @@ export default class ChatDashboard extends Component {
 
   async loadChannels() {
     let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
-    this.setState({channels: loadedChannels});
-    console.log(this.state.channels)
+    this.setState({
+      channels: loadedChannels,
+      chatKitRooms: this.state.chatKitUser.rooms
+    });
+    console.log(this.state.chatKitRooms)
   }
 
   selectChannel(channel) {
@@ -62,6 +70,17 @@ export default class ChatDashboard extends Component {
     // post to db with new channel name and set state with the new channelId
     try {
       const channel = await addChannels(name, this.props.user.id);
+      this.state.chatKitUser.createRoom({
+        id: channel._id,
+        name: channel.name
+      }).then(room => {
+        console.log("created room ", room);
+        this.setState(prevState => ({
+          chatKitRooms: [...prevState.chatKitRooms, room]
+        }));
+      }).catch(err => {
+        console.log(err);
+      })
       const newUser = {...this.state.user};
       newUser.channelIDs.push(channel._id);
       this.setState(prevState => ({
@@ -97,7 +116,7 @@ export default class ChatDashboard extends Component {
             </div>
             <ChannelList
               isLoadingChannels={this.state.isLoadingChannels}
-              channels={this.state.channels}
+              channels={this.state.chatKitRooms}
               selectChannel={this.selectChannel}
             />
             <div className="row">
@@ -115,7 +134,7 @@ export default class ChatDashboard extends Component {
             ) : (
                 <ChatRoom
                   channel={this.state.channelSelected}
-                  user={this.state.user}
+                  user={this.state.chatKitUser}
                   messages={this.getChannelMessages}
                 />
               )}

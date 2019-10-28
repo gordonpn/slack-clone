@@ -4,7 +4,30 @@ export default class MessageList extends Component {
   constructor(props) {
     super(props);
     this.renderMessages = this.renderMessages.bind(this);
+
+    this.state = {
+      messages: []
+    }
   }
+
+  componentDidMount() {
+    this.props.user.fetchMultipartMessages({
+      roomId: this.props.channelId
+    })
+      .then(messages => {
+        const messageArr = messages.map(rawMessage => {
+          const message = {senderId: rawMessage.senderId, text: rawMessage.parts[0].payload.content}
+          return message
+        })
+        this.setState({
+          messages: messageArr
+        })
+      })
+      .catch(err => {
+        console.log(`Error fetching messages: ${err}`)
+      })
+  }
+
   renderMessages() {
     return (
       <ul
@@ -12,10 +35,10 @@ export default class MessageList extends Component {
           listStyleType: "none",
         }}
       >
-        {this.props.messages.map(message => {
+        {this.state.messages.map(message => {
           return (
-            <li key={message.message}>
-              {message.message}
+            <li key={message.id}>
+              {message.text}
             </li>
           )
         })}
@@ -24,7 +47,7 @@ export default class MessageList extends Component {
   }
 
   render() {
-    if(this.messages) {
+    if(this.state.messages) {
       return this.renderMessages();
     } else {
       return (

@@ -14,17 +14,17 @@ export default class ChatRoom extends Component {
           </div>
           <div className="row">
             <div className="col-md-12 messageList">
-              <MessageList messages={this.props.channel.messages} />
+              <MessageList user={this.props.user} channelId={this.props.channel.id} />
             </div>
           </div>
           <div className="row">
             <div className="col-md-12 messageBox">
-              <MessageBox />
+              <MessageBox user={this.props.user} channelId={this.props.channel.id}/>
             </div>
           </div>
         </div>
         <div className="col-md-4 inviteModal" align="center">
-          <InviteModal channelId={this.props.channel._id}/>
+          <InviteModal channelId={this.props.channel.id} user={this.props.user}/>
         </div>
       </div>
 

@@ -35,7 +35,7 @@ export default class ChannelList extends Component {
                 return (
                   <li
                     style={{paddingBottom: "5px"}}
-                    key={channel._id}
+                    key={channel.id}
                     value={channel.name}
                   >
                     <Button
