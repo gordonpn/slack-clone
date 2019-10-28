@@ -30,6 +30,7 @@ export async function getChannelsForUser(ids) {
     })
   }
 
+  /*
   let channels = [];
   rawResponse.forEach(channel => {
     let aChannel = {
@@ -38,12 +39,12 @@ export async function getChannelsForUser(ids) {
     };
     channels.push(aChannel);
   });
-
-  return channels;
+*/
+  return rawResponse;
 }
 
 export async function addChannels(name, id) {
-  let channelId = "";
+  let channel = "";
 
   await axios.post(
     '/channels',
@@ -57,10 +58,10 @@ export async function addChannels(name, id) {
       }
     }
   ).then(res => {
-    channelId = res.data['_id'];
+    channel = res.data;
   }).catch(err => {
     throw err;
   });
 
-  return channelId;
+  return channel;
 }

@@ -54,6 +54,7 @@ export default class App extends Component {
         alert(`Thank you for signing up, please login with your username: ${userName}`);
       }
     } catch (error) {
+      alert("Unable to sign up with that username!");
       console.log(error);
       return;
     }
@@ -87,6 +88,7 @@ export default class App extends Component {
     this.setState({
       isLoggedIn: false
     });
+    console.clear();
     sessionStorage.clear();
   }
   render() {

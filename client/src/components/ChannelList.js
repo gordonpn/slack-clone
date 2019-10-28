@@ -35,13 +35,13 @@ export default class ChannelList extends Component {
                 return (
                   <li
                     style={{paddingBottom: "5px"}}
-                    key={channel.id}
+                    key={channel._id}
                     value={channel.name}
                   >
                     <Button
                       type="button"
                       className="btn btn-primary btn-block"
-                      onClick={() => this.props.selectChannel(channel.id)}
+                      onClick={() => this.props.selectChannel(channel)}
                     >
                       {channel.name}
                     </Button>

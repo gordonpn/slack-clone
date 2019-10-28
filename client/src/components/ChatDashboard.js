@@ -3,6 +3,7 @@ import ChatRoom from './ChatRoom';
 import AddChannelForm from './AddChannelForm';
 import ChannelList from './ChannelList';
 import {addChannels, getChannelsForUser} from '../api/channels';
+import ChatKit from '@pusher/chatkit-client';
 
 
 export default class ChatDashboard extends Component {
@@ -23,6 +24,19 @@ export default class ChatDashboard extends Component {
   }
 
   componentDidMount() {
+    const chatManager = new ChatKit.ChatManager({
+      instanceLocator: 'v1:us1:55ce6f9e-f791-4467-ac53-ad1c8a1ecd27',
+      userId: this.props.user.id,
+      tokenProvider: new ChatKit.TokenProvider({
+        url: 'http://localhost:3001/users/auth',
+      })
+    })
+
+    chatManager
+      .connect()
+      .then(currentUser => console.log("currentUser", currentUser))
+      .catch(err => console.log(err));
+
     // fetch all the channels then set state
     this.loadChannels().then(() => {
       this.setState({
@@ -34,10 +48,11 @@ export default class ChatDashboard extends Component {
   async loadChannels() {
     let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
     this.setState({channels: loadedChannels});
+    console.log(this.state.channels)
   }
 
-  selectChannel(channelId) {
-    this.setState({channelSelected: channelId});
+  selectChannel(channel) {
+    this.setState({channelSelected: channel});
   }
 
   async addChannel(e, name) {
@@ -46,12 +61,11 @@ export default class ChatDashboard extends Component {
 
     // post to db with new channel name and set state with the new channelId
     try {
-      const channelId = await addChannels(name, this.props.user.id);
-      const newElement = {name: name, id: channelId};
+      const channel = await addChannels(name, this.props.user.id);
       const newUser = {...this.state.user};
-      newUser.channelIDs.push(channelId);
+      newUser.channelIDs.push(channel._id);
       this.setState(prevState => ({
-        channels: [...prevState.channels, newElement],
+        channels: [...prevState.channels, channel],
         user: newUser
       }));
     } catch (error) {
