@@ -59,7 +59,18 @@ export default class ChatDashboard extends Component {
     console.log(this.state.chatKitRooms)
   }
 
-  selectChannel(channel) {
+  async selectChannel(channel) {
+    await this.state.chatKitUser.subscribeToRoomMultipart({
+      roomId: channel.id,
+      hooks: {
+        onMessage: message => {
+          const customData = !message.customData ? [] : message.customData;
+          customData.push({senderId: message.senderId, message: message.parts[0].payload.content});
+          channel.customData = customData;
+        }
+      },
+      messageLimit: 10
+    })
     this.setState({channelSelected: channel});
   }
 

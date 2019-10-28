@@ -6,13 +6,13 @@ export default class MessageList extends Component {
     this.renderMessages = this.renderMessages.bind(this);
 
     this.state = {
-      messages: []
+      messages: this.props.channel.customData
     }
   }
 
   componentDidMount() {
     this.props.user.fetchMultipartMessages({
-      roomId: this.props.channelId
+      roomId: this.props.channel.id
     })
       .then(messages => {
         const messageArr = messages.map(rawMessage => {

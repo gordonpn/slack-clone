@@ -74,9 +74,9 @@ code {
 }
 
 .messageBox {
-  height: 88vh;
+  height: 10vh;
   background-color: lightslategray;
-  padding-top: 40px;
+  margin-top: 50vh;
 }
 
 .chatRoomTitle {
@@ -96,9 +96,13 @@ code {
 }
 
 .mb-3 {
-  margin-top: 65vh;
+  margin-top: 0vh;
 }
 
 .invalidUsername {
   color: red;
+}
+
+.messageList {
+  overflow: auto;
 }

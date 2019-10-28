@@ -14,7 +14,7 @@ export default class ChatRoom extends Component {
           </div>
           <div className="row">
             <div className="col-md-12 messageList">
-              <MessageList user={this.props.user} channelId={this.props.channel.id} />
+              <MessageList user={this.props.user} channel={this.props.channel} />
             </div>
           </div>
           <div className="row">
