@@ -1,5 +1,4 @@
 const User = require('../models/User.js');
-
 // create user
 exports.create = (req, res) => {
   // Validate request
@@ -17,6 +16,18 @@ exports.create = (req, res) => {
   user
     .save()
     .then(data => {
+      req.app.get('chatKit').createUser({
+        id: data._id,
+        name: data.username,
+      })
+        .then(() => {
+          console.log('User created successfully');
+        }).catch((err) => {
+          console.log(err);
+          res.status(500).send({
+            message: err.message || 'Some error occurred while creating the user. (issue with chatkit)'
+          });
+        });
       res.send(data);
     })
     .catch(err => {
@@ -24,7 +35,17 @@ exports.create = (req, res) => {
         message: err.message || 'Some error occurred while creating the user.'
       });
     });
+
 };
+
+exports.authenticate = (req, res) => {
+  const authData = req.app.get('chatKit').authenticate({
+    userId: req.query.user_id
+  });
+
+  res.status(authData.status)
+     .send(authData.body);
+}
 
 exports.findAll = (req, res) => {
   User.find()

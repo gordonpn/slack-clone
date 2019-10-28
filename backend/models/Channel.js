@@ -12,7 +12,13 @@ const channelSchema = new Schema({
   ownerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  messages: [
+    {
+      message: {type: String, required: true},
+      senderId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+    }
+  ]
 },
   {
     timestamps: true
