@@ -60,6 +60,10 @@ export default class ChatDashboard extends Component {
     this.loadChannels();
   }
 
+  componentWillUnmount() {
+    this.state.chatKitUser.disconnect();
+  }
+
   async loadChannels() {
     let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
     this.setState({
