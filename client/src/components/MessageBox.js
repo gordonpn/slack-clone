@@ -27,6 +27,13 @@ export default class MessageBox extends Component {
       })
     this.setState({message: ""});
   }
+
+  enterPressed(event) {
+    var code = event.keyCode || event.which;
+    if (code === 13) {
+      this.sendMessage(event);
+    }
+  }
   render() {
     return (
       <InputGroup className="mb-3">
@@ -36,6 +43,7 @@ export default class MessageBox extends Component {
           aria-describedby="basic-addon2"
           value={this.state.message}
           onChange={this.handleChange}
+          onKeyPress={this.enterPressed.bind(this)}
         />
         <InputGroup.Append>
           <Button className="btn btn-secondary" disabled={!this.state.message} onClick={e => this.sendMessage(e)} >Send</Button>
