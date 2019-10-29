@@ -17,7 +17,7 @@ exports.create = (req, res) => {
     .save()
     .then(data => {
       req.app.get('chatKit').createUser({
-        id: data._id,
+        id: data.username,
         name: data.username,
       })
         .then(() => {
@@ -44,7 +44,7 @@ exports.authenticate = (req, res) => {
   });
 
   res.status(authData.status)
-     .send(authData.body);
+    .send(authData.body);
 }
 
 exports.findAll = (req, res) => {
@@ -149,29 +149,29 @@ exports.updateChannels = (req, res) => {
   }
 
   User.findOneAndUpdate({username: req.params.username}, {$addToSet: {channelIDs: req.body.channelId}}, {new: true})
-  .then(user => {
-    if (!user) {
-      return res.status(404).send({
-        message: 'No user found with that Id'
-      });
-    }
-    return res.status(200).send({
-      message: 'Success',
-      user: user
+    .then(user => {
+      if (!user) {
+        return res.status(404).send({
+          message: 'No user found with that Id'
+        });
+      }
+      return res.status(200).send({
+        message: 'Success',
+        user: user
+      })
     })
-  })
-  .catch(err => {
-    if (err.kind === 'ObjectId') {
-      console.log('User not found with id (objectID error)');
+    .catch(err => {
+      if (err.kind === 'ObjectId') {
+        console.log('User not found with id (objectID error)');
+        res.status(405).send({
+          message: "User not found with id (objectID error)"
+        });
+      }
+      console.log('Error updating user with id');
       res.status(405).send({
-        message: "User not found with id (objectID error)"
+        message: "User not found with that id"
       });
-    }
-    console.log('Error updating user with id');
-    res.status(405).send({
-      message: "User not found with that id"
     });
-  });
 
 
 };
