@@ -42,8 +42,8 @@ export default class ChatDashboard extends Component {
           })
 
           //avoid alerting the user who created the channel
-          if (!this.state.chatKitUser.rooms.includes(room)) {
-            alert(`added to room ${room.name}`)
+          if (room.createdByUserId !== this.state.chatKitUser.id) {
+            alert(`You have been added to room ${room.name}`)
           }
         }
       })
