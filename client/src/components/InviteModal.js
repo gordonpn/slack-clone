@@ -37,7 +37,7 @@ export default class InviteModal extends Component {
       const response = await updateUserChannel(this.state.username, this.props.channelId);
       if (response.status === 200) {
         await this.props.user.addUserToRoom({
-          userId: response.data.user._id,
+          userId: response.data.user.username,
           roomId: this.props.channelId
         });
         console.log(`invite sent to ${this.state.username}`);

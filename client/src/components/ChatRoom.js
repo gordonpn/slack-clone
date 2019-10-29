@@ -3,6 +3,7 @@ import MessageBox from './MessageBox';
 import InviteModal from './InviteModal';
 import MessageList from './MessageList';
 export default class ChatRoom extends Component {
+
   render() {
     return (
       <div className="row">
@@ -14,17 +15,17 @@ export default class ChatRoom extends Component {
           </div>
           <div className="row">
             <div className="col-md-12 messageList">
-              <MessageList user={this.props.user} channel={this.props.channel} />
+              <MessageList messages={this.props.messages} />
             </div>
           </div>
           <div className="row">
             <div className="col-md-12 messageBox">
-              <MessageBox user={this.props.user} channelId={this.props.channel.id}/>
+              <MessageBox user={this.props.user} channel={this.props.channel} />
             </div>
           </div>
         </div>
         <div className="col-md-4 inviteModal" align="center">
-          <InviteModal channelId={this.props.channel.id} user={this.props.user}/>
+          <InviteModal channelId={this.props.channel.id} user={this.props.user} />
         </div>
       </div>
 
