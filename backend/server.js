@@ -14,7 +14,7 @@ app.use(express.json());
 const chatkit = new Chatkit.default({
   instanceLocator: 'v1:us1:55ce6f9e-f791-4467-ac53-ad1c8a1ecd27',
   key: 'dfead682-b3e8-4ffc-a159-0a96272d493a:6XDyimo6EBQJWGIQz4at5aaZmCzWyHYxDWoAn+ecwjI='
-})
+});
 
 app.set('chatKit', chatkit);
 
@@ -40,3 +40,5 @@ require('./routes/users.routes.js')(app);
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
+
+module.exports = app;
