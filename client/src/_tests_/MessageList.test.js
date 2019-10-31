@@ -13,7 +13,6 @@ describe('MessageList component should render messages', () => {
     const messages = [{senderId: 111, parts: [{payload: {content: "hello"}}]}];
     const wrapper = shallow(<MessageList messages={messages} />);
     expect(wrapper.find('div')).toBeTruthy();
-    console.log(wrapper.debug())
   });
 
 });
