@@ -3,9 +3,9 @@ node_js:
   - "12"
 cache:
   directories:
-    - client\node_modules
+    - node_modules
 script:
-  - npm test
+  - cd client && npm test
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
