@@ -4,8 +4,9 @@ node_js:
 cache:
   directories:
   - node_modules
+before_install:
+  - npm run installall
 script:
-  - npm start
   - npm test
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
