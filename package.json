@@ -6,7 +6,7 @@
   "scripts": {
     "installall": "concurrently \"npm i\" \"cd backend && npm i\" \"cd client && npm i\" ",
     "start": "concurrently \"cd backend && nodemon server\" \"cd client && npm start\"",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "cd client && npm test"
   },
   "repository": {
     "type": "git",
