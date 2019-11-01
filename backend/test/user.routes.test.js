@@ -23,20 +23,6 @@ describe('check if string is a string', () => {
 
 });
 
-// describe("users", () => {
-//   describe("GET /", () => {
-//     it("should get all users", (done) => {
-//       chai.request(app)
-//         .get('/users')
-//         .end((err, res) => {
-//           res.should.have.status(200);
-//           // res.body.should.be.a('object');
-//           done();
-//         });
-//     });
-//   });
-// });
-
 describe('unit testing the users list', function () {
 
   it('should return OK status', function () {

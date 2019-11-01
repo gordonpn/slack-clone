@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "12"
+  - '12'
 cache:
   directories:
   - node_modules
@@ -11,8 +11,12 @@ script:
 after_success:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh success $WEBHOOK_URL
+  - "./send.sh success $WEBHOOK_URL"
 after_failure:
   - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
   - chmod +x send.sh
-  - ./send.sh failure $WEBHOOK_URL
+  - "./send.sh failure $WEBHOOK_URL"
+env:
+  global:
+    - secure: o8fgukHr4kAbah5LZiBIl4PGiBVmcBz5dWPz2tgdOWPIsgMj4XlSbOEoT4VrrwEzt3ZLxSfbcU32BzcIX14TdaXCQRWkQv8sYw6bYGllq+aoLFE4LkAx6TNJicQW4LVgXFwmsgkC4s8P0GFuIbNnLnhDQVl7CboWIO5S8RW6O/fvRdDPW6o/Oc+XkTlFJLbYUu9DbtVDMK3oTbJEBm698uXTaByKx3/xJNRZG6v5abcoPBK9/thkdVFEJlIgzALrJJ79Vjj4FZhNQNuILTwlBpLEmmcJWKfzeeOHUN1+RWQ16bWTYM2uSdbo5etaYOJsbyfyBE58C06Mi5ur1EmQTOvI2ECrkNTfGPq952SL479M0hZh/TTRaIWVNUpFTF5PtF+qjiRYExVj16p4VFkMALWPk7yihg7kE/U7kOzjRVhYhffHpjrdzYzO36hEzFTS7EiORar1K/jHCV8gbCtXwu+hw1MZ+xprWZNtSWdINClnbQT3AyLpQ7/mVFF9uOL/5AK685S92xq0ycwC6QhZ173koU0xxObE4kZkJ/AVPJDep7GERtjwqvSZPfzDGtGWJiGewgGYI5PhXzEZBRZU8wXx2jmt8eevG7QnMjbNRxG6NU9k/6kMb1jTU/e6s+v4JzLVDZJTSBo4fJqUEJuencVEUbKwwi6k2yoJvI92UKU=
+    - secure: ag0HAjDx1gpnIsXo7Ra5FB2dU6ygCa9RL8dnwKjTk7hkCF9TjvRAUPJXsuKRAlenxc9jlvrGdjK3aWWPzBg2GcoYwGrypnvNLqzeQ7E+IIdBfOBLI0IzF9/gGyEiqr06oe0QcYSqpfK/0KpsFdAGFqQ6xeQOYfe/UgO4svRa3Jy1AomwqFwsxm7pmzQFqTeBNkEkldcWYd01oBlgLP1lD4ZdxnGFTTmacSo1fii3sK7GiQNMurf2dB0wEJwM6rU1DKT8vb+3vHEF4ivqI3X3xwJvQ0OEYLgFqpKqRVg83HHDwNVFzM2oYAbqdxR9B+izEp1abS01h2+BvZdbDPub1n9pZtfqNqXb6d5CdkFeu7qtWlNWzRlOyZjyKT5rxAj0YIe+LAFcwgwrI9UcIKL+tSv2PjKWHHbCpnFNWJO0xGgrLZpbP0JNaP+gCulqOC0KeNNPEjdTgg90FIzLjeBGgLPhj5Frnj0lzg8Fb/A5ZhWEAtAU3CzFmAFYrE5WnGt+3HwAyeQAOaEUzq/3qwI0uFJMXweSzEdwjjwF6PVlGKPN6pcUYjqhykqeumBPQWcoBMvtiSD+Y/cHyrwKFseHz/LYHeFG0hIBXwrdpyl+GL0aRpFrfthMd1oE86l/ryVKfmcOOG8hJCkptjlPVnEWpyXd5ilpINoRN77O3fAVBgQ=
