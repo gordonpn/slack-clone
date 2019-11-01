@@ -29,17 +29,6 @@ export async function getChannelsForUser(ids) {
       // todo do something with this exception?
     })
   }
-
-  /*
-  let channels = [];
-  rawResponse.forEach(channel => {
-    let aChannel = {
-      name: channel['name'],
-      id: channel['_id']
-    };
-    channels.push(aChannel);
-  });
-*/
   return rawResponse;
 }
 
