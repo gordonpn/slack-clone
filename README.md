@@ -43,6 +43,10 @@ Note that you must have authentication data to the MongoDB instance to manipulat
 
 Explain how to run the automated tests for this web application
 
+## Block diagram
+
+![block diagram](doc/Block-diagram.png)
+
 ## Built With
 
 * [MongoDB](https://www.mongodb.com/) - Database
