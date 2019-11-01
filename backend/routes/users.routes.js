@@ -4,6 +4,9 @@ module.exports = app => {
   // Create a new User
   app.post('/users', users.create);
 
+  //authenticate user with chatkit
+  app.post('/users/auth', users.authenticate);
+
   // Retrieve all Users
   app.get('/users', users.findAll);
 

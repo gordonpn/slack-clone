@@ -41,7 +41,7 @@ export default class ChannelList extends Component {
                     <Button
                       type="button"
                       className="btn btn-primary btn-block"
-                      onClick={() => this.props.selectChannel(channel.id)}
+                      onClick={() => this.props.selectChannel(channel)}
                     >
                       {channel.name}
                     </Button>
