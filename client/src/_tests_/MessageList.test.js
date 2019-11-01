@@ -15,7 +15,7 @@ describe('MessageList component should render messages', () => {
     const messages = [{senderId: 111, parts: [{payload: {content: "hello"}}]}];
     const wrapper = shallow(<MessageList messages={messages} />);
     const message = wrapper.find('div div div').text();
-    expect(message).toBe("111: hello");
+    expect(message).toBe(`${messages[0].senderId}: ${messages[0].parts[0].payload.content}`);
   });
 
   it('renders messageList with multiple messages displayed', () => {
@@ -26,8 +26,8 @@ describe('MessageList component should render messages', () => {
     const wrapper = shallow(<MessageList messages={messages} />);
     const message1 = wrapper.find('div div div').getElements()[0].props.children;
     const message2 = wrapper.find('div div div').getElements()[1].props.children;
-    expect(message1).toBe('111: message1');
-    expect(message2).toBe('222: message2');
+    expect(message1).toBe(`${messages[0].senderId}: ${messages[0].parts[0].payload.content}`);
+    expect(message2).toBe(`${messages[1].senderId}: ${messages[1].parts[0].payload.content}`);
   });
 
 });
