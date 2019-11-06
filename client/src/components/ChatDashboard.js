@@ -17,7 +17,8 @@ export default class ChatDashboard extends Component {
       chatKitRooms: [],
       messages: [],
       channelSelected: '',
-      isLoadingChannels: true
+      isLoadingChannels: true,
+      users: []
     };
 
     this.selectChannel = this.selectChannel.bind(this);
@@ -72,14 +73,14 @@ export default class ChatDashboard extends Component {
   }
 
   async selectChannel(channel) {
-    if (channel === this.state.channelSelected) {
+    if (channel.id === this.state.channelSelected.id) {
       return;
     }
 
     this.setState({
       messages: []
     })
-    await this.state.chatKitUser.subscribeToRoomMultipart({
+    const selectChannel = await this.state.chatKitUser.subscribeToRoomMultipart({
       roomId: channel.id,
       hooks: {
         onMessage: message => {
@@ -89,7 +90,10 @@ export default class ChatDashboard extends Component {
         }
       }
     })
-    this.setState({channelSelected: channel});
+    this.setState({
+      channelSelected: selectChannel,
+      users: selectChannel.users
+    });
   }
 
   async addChannel(e, name) {
@@ -164,6 +168,7 @@ export default class ChatDashboard extends Component {
                   channel={this.state.channelSelected}
                   user={this.state.chatKitUser}
                   messages={this.state.messages}
+                  users={this.state.users}
                 />
               )}
           </div>
