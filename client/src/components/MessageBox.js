@@ -11,6 +11,7 @@ export default class MessageBox extends Component {
   }
   handleChange(e) {
     this.setState({message: e.target.value});
+    this.props.user.isTypingIn({roomId: this.props.channel.id});
   }
   sendMessage(e) {
     e.preventDefault();
