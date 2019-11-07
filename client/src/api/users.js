@@ -23,8 +23,7 @@ export async function addUser(userName) {
 
 export async function updateUserChannel(userName, channelId) {
   try {
-    const response = await axios.patch(`/users/channels/${userName}`, {channelId: channelId});
-    return response;
+    return await axios.patch(`/users/channels/${userName}`, {channelId: channelId});
   } catch (error) {
     throw error;
   }
