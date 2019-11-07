@@ -31,3 +31,14 @@ describe('testing get route for a non-existent channel id', () => {
       })
   })
 });
+
+describe('testing channel post with an empty name', () => {
+  it('should return the 400 status', () => {
+    let params = {};
+    return request(app)
+      .post('/channels', params)
+      .then( (response) => {
+        assert.equal(response.status, 400)
+      })
+  })
+});

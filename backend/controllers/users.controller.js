@@ -45,7 +45,7 @@ exports.authenticate = (req, res) => {
 
   res.status(authData.status)
     .send(authData.body);
-}
+};
 
 exports.findAll = (req, res) => {
   User.find()

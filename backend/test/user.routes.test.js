@@ -21,7 +21,7 @@ describe('testing get route for users list', () => {
   });
 });
 
-describe('testing get route for a non-existent user id', () => {
+describe('testing get route for a non-existing user id', () => {
   it('should return the 404 status', () => {
     let id = "idNotFound";
     return request(app)
@@ -32,7 +32,7 @@ describe('testing get route for a non-existent user id', () => {
   })
 });
 
-describe('testing get route for a non-existent user name', () => {
+describe('testing get route for a non-existing user name', () => {
   it('should return the 200 status', () => {
     let username = "nameNotFound";
     return request(app)
@@ -43,3 +43,48 @@ describe('testing get route for a non-existent user name', () => {
   })
 });
 
+describe('testing user post request with empty body', () => {
+  it('should return the 400 status', () => {
+    let params = {};
+    return request(app)
+      .post('/users', params)
+      .then( (response) => {
+        assert.equal(response.status, 400)
+      })
+  })
+});
+
+
+describe('testing user post request with an existing username', () => {
+  it('should return the 400 status', () => {
+    let params= {"username": "aUsernameThatExists"};
+    return request(app)
+      .post('/users', params)
+      .then( (response) => {
+        assert.equal(response.status, 400)
+      })
+  })
+});
+
+describe('testing user authenticate with an existing username', () => {
+  it('should return the 200 status', () => {
+    let params= {"username": "aUsernameThatExists"};
+    return request(app)
+      .post('/users/auth', params)
+      .then( (response) => {
+        assert.equal(response.status, 200)
+      })
+  })
+});
+
+describe("testing updating a non-existing user's channel", () => {
+  it('should return the 400 status', () => {
+    let id = "idDoesNotExist"
+    let params = {"channelId": "random"};
+    return request(app)
+      .patch(`/users/channels/${id}`, params)
+      .then( (response) => {
+        assert.equal(response.status, 400)
+      })
+  })
+});
