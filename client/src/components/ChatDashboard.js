@@ -125,7 +125,7 @@ export default class ChatDashboard extends Component {
     const newChannels = this.state.channels.filter(channel => {
       return channel.id !== this.state.channelSelected;
     });
-    const channelSelected = newChannels.length >= 0 ? newChannels[0] : null;
+    const channelSelected = newChannels[0];
     this.setState({
       channels: newChannels,
       channelSelected: channelSelected.id
@@ -160,12 +160,12 @@ export default class ChatDashboard extends Component {
             {!this.state.channelSelected ? (
               <div align="center">Please select a channel</div>
             ) : (
-                <ChatRoom
-                  channel={this.state.channelSelected}
-                  user={this.state.chatKitUser}
-                  messages={this.state.messages}
-                />
-              )}
+              <ChatRoom
+                channel={this.state.channelSelected}
+                user={this.state.chatKitUser}
+                messages={this.state.messages}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -7,8 +7,6 @@ chai.use(require('chai-http'));
 chai.should();
 
 const assert = require('assert');
-const expect = require('chai').expect;
-const should = require('chai').should;
 const request = require('supertest');
 
 describe('testing get route for channels list', () => {

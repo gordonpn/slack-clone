@@ -64,7 +64,8 @@ export default class InviteModal extends Component {
             </Modal.Header>
             <Modal.Body>
               Search For User <input type="text" value={this.state.username}
-                onChange={this.handleChange} placeholder={this.state.placeHolder} />
+                                     onChange={this.handleChange}
+                                     placeholder={this.state.placeHolder}/>
               <div className="invalidUsername">
                 {this.state.invalidUsername && "Invalid Username"}
               </div>
@@ -74,10 +75,9 @@ export default class InviteModal extends Component {
                 Close
               </Button>
               <Button onClick={e => this.sendInvite(e)}
-                disabled={!this.state.username}>
+                      disabled={!this.state.username}>
                 Invite This User
               </Button>
-              {/*<h1>{this.state.username}</h1>*/}
             </Modal.Footer>
           </Modal>
         </form>

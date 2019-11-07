@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 export default class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       username: "",
       loginPage: true,
       signUpPage: false
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.enableSignUpPage = this.enableSignUpPage.bind(this);
@@ -17,7 +17,7 @@ export default class Login extends Component {
   }
 
   handleChange(e) {
-    this.setState({ username: e.target.value });
+    this.setState({username: e.target.value});
   }
 
   enableLoginPage(e) {
@@ -63,12 +63,15 @@ export default class Login extends Component {
         <form>
           <label>
             username:
-            <input type="text" value={this.state.username} onChange={this.handleChange} />
-            <button onClick={e => this.login(e)} disabled={!this.state.username}> log me in</button>
+            <input type="text" value={this.state.username}
+                   onChange={this.handleChange}/>
+            <button onClick={e => this.login(e)}
+                    disabled={!this.state.username}> log me in
+            </button>
           </label>
           <div>
             Don't have username? sign up here
-              <button onClick={e => this.enableSignUpPage(e)}> sign me up</button>
+            <button onClick={e => this.enableSignUpPage(e)}> sign me up</button>
           </div>
         </form>
       </div>
@@ -83,12 +86,15 @@ export default class Login extends Component {
         <form>
           <label>
             username:
-            <input type="text" value={this.state.username} onChange={this.handleChange} />
-            <button onClick={e => this.signUp(e)} disabled={!this.state.username}> Sign me up</button>
+            <input type="text" value={this.state.username}
+                   onChange={this.handleChange}/>
+            <button onClick={e => this.signUp(e)}
+                    disabled={!this.state.username}> Sign me up
+            </button>
           </label>
           <div>
             already have a username? log in here
-              <button onClick={e => this.enableLoginPage(e)}> log me in</button>
+            <button onClick={e => this.enableLoginPage(e)}> log me in</button>
           </div>
         </form>
       </div>
