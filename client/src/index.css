@@ -43,7 +43,7 @@ code {
 
 .leftCol {
   height: 94vh;
-  background-color: rgba(32,34,37,.6);
+  background-color: rgba(32, 34, 37, .6);
 }
 
 .rightCol {
@@ -74,7 +74,7 @@ code {
 }
 
 .messageBox {
-  margin-top: 1-px;
+  margin-top: 1 -px;
 }
 
 .chatRoomTitle {

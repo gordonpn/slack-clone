@@ -21,6 +21,7 @@ export default class App extends Component {
     this.logUserIn = this.logUserIn.bind(this);
     this.logOutUser = this.logOutUser.bind(this);
   }
+
   async componentDidMount() {
     if (!this.state.wasLoggedIn) return;
 
@@ -47,6 +48,7 @@ export default class App extends Component {
     }
 
   }
+
   async setUser(userName) {
     try {
       const response = await addUser(userName);
@@ -81,9 +83,9 @@ export default class App extends Component {
       window.sessionStorage.setItem('userName', JSON.stringify(this.state.user.username));
     } catch (error) {
       console.log(error);
-      return;
     }
   }
+
   logOutUser() {
     this.setState({
       isLoggedIn: false
@@ -91,30 +93,31 @@ export default class App extends Component {
     console.clear();
     sessionStorage.clear();
   }
+
   render() {
     return (
       <div className="container-fluid">
         <div className="jumbotron-fluid" align="center">
           <h1>Slack Clone App</h1>
           {this.state.isLoggedIn &&
-            <Button
-              type="button"
-              className="logoutButton btn btn-secondary"
-              onClick={this.logOutUser}>
-              Log out
+          <Button
+            type="button"
+            className="logoutButton btn btn-secondary"
+            onClick={this.logOutUser}>
+            Log out
           </Button>
           }
         </div>
         {!this.state.isLoggedIn ? (
-          <Login logUserIn={this.logUserIn} setUser={this.setUser} />
+          <Login logUserIn={this.logUserIn} setUser={this.setUser}/>
         ) : (
-            (this.state.user.username &&
-              <ChatDashboard
-                user={this.state.user}
-                isloggedIn={this.state.isLoggedIn}
-              />
-            )
-          )}
+          (this.state.user.username &&
+            <ChatDashboard
+              user={this.state.user}
+              isloggedIn={this.state.isLoggedIn}
+            />
+          )
+        )}
       </div>
     );
   }

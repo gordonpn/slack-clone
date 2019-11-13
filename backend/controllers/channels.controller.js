@@ -21,7 +21,8 @@ exports.create = (req, res) => {
     .then(data => {
       const user = users.findByIdAndAddChannelId(req.body.ownerId, data._id);
       res.send(data);
-    }).catch(err => {
+    })
+    .catch(err => {
       res.status(500).send({
         message: err.message || "Some error occurred while creating the Channel."
       });
@@ -33,7 +34,8 @@ exports.findAll = (req, res) => {
   Channel.find()
     .then(channels => {
       res.send(channels);
-    }).catch(err => {
+    })
+    .catch(err => {
       res.status(500).send({
         message: err.message || "Error occurred while creating the Channel."
       })
@@ -50,7 +52,8 @@ exports.findOne = (req, res) => {
         });
       }
       res.send(channel);
-    }).catch(err => {
+    })
+    .catch(err => {
       if (err.kind === 'ObjectId') {
         return res.status(404).send({
           message: "Channel not found with id " + req.params.channelId
@@ -82,7 +85,8 @@ exports.update = (req, res) => {
         });
       }
       res.send(channel);
-    }).catch(err => {
+    })
+    .catch(err => {
       if (err.kind === 'ObjectId') {
         return res.status(404).send({
           message: "Note not found with id " + req.params.channelId
@@ -104,7 +108,8 @@ exports.delete = (req, res) => {
         });
       }
       res.send({message: "Channel deleted successfully!"});
-    }).catch(err => {
+    })
+    .catch(err => {
       if (err.kind === 'ObjectId' || err.name === 'NotFound') {
         return res.status(404).send({
           message: "Channel not found with id " + req.params.channelId
