@@ -3,6 +3,7 @@ import ChatRoom from './ChatRoom';
 import AddChannelForm from './AddChannelForm';
 import ChannelList from './ChannelList';
 import {addChannels, getChannelsForUser} from '../api/channels';
+import {updateUserChannel} from '../api/users';
 import ChatKit from '@pusher/chatkit-client';
 
 
@@ -17,13 +18,13 @@ export default class ChatDashboard extends Component {
       chatKitRooms: [],
       messages: [],
       channelSelected: '',
-      isLoadingChannels: true,
-      users: []
+      isLoadingChannels: true
     };
 
     this.selectChannel = this.selectChannel.bind(this);
     this.addChannel = this.addChannel.bind(this);
     this.deleteChannel = this.deleteChannel.bind(this);
+    this.sendInvite = this.sendInvite.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +47,12 @@ export default class ChatDashboard extends Component {
           if (room.createdByUserId !== this.state.chatKitUser.id) {
             alert(`You have been added to room ${room.name}`)
           }
+        },
+        onUserJoined: user => {
+          this.forceUpdate()
+        },
+        onPresenceChanged: member => {
+          this.forceUpdate()
         }
       })
       .then(currentUser => {
@@ -91,8 +98,7 @@ export default class ChatDashboard extends Component {
       }
     })
     this.setState({
-      channelSelected: selectChannel,
-      users: selectChannel.users
+      channelSelected: selectChannel
     });
   }
 
@@ -136,6 +142,24 @@ export default class ChatDashboard extends Component {
     });
   }
 
+  async sendInvite(userName, channelId) {
+    try {
+      const response = await updateUserChannel(userName, channelId);
+      if (response.status === 200) {
+        const room = await this.state.chatKitUser.addUserToRoom({
+          userId: response.data.user.username,
+          roomId: channelId
+        });
+        this.setState({
+          users: room.users
+        })
+        return true;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -168,7 +192,8 @@ export default class ChatDashboard extends Component {
                   channel={this.state.channelSelected}
                   user={this.state.chatKitUser}
                   messages={this.state.messages}
-                  users={this.state.users}
+                  users={this.state.channelSelected.users}
+                  sendInvite={this.sendInvite}
                 />
               )}
           </div>

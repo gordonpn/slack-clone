@@ -6,12 +6,12 @@ export default class UserList extends Component {
       <div>
         <br></br>
         <div>
-          <h3>Users in this chat:</h3>
+          <h3>Users in this Channel:</h3>
         </div>
-        {this.props.users.map(user => {
+        {this.props.users.map((user, index) => {
           return (
-            <div>
-              {user.name}
+            <div key={index}>
+              {`${user.name} (${user.presence.state})`}
             </div>
           )
         })}
