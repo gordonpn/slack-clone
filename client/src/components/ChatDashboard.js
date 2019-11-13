@@ -33,14 +33,14 @@ export default class ChatDashboard extends Component {
       tokenProvider: new ChatKit.TokenProvider({
         url: process.env.REACT_APP_TOKEN_URL,
       })
-    })
+    });
 
     chatManager
       .connect({
         onAddedToRoom: room => {
           this.setState({
             chatKitRooms: this.state.chatKitUser.rooms
-          })
+          });
 
           //avoid alerting the user who created the channel
           if (room.createdByUserId !== this.state.chatKitUser.id) {
@@ -112,7 +112,7 @@ export default class ChatDashboard extends Component {
         })
       }).catch(err => {
         console.log(err);
-      })
+      });
       const newUser = {...this.state.user};
       newUser.channelIDs.push(channel.id);
       this.setState(prevState => ({
@@ -129,7 +129,7 @@ export default class ChatDashboard extends Component {
     const newChannels = this.state.channels.filter(channel => {
       return channel.id !== this.state.channelSelected;
     });
-    const channelSelected = newChannels.length >= 0 ? newChannels[0] : null;
+    const channelSelected = newChannels[0];
     this.setState({
       channels: newChannels,
       channelSelected: channelSelected.id
