@@ -17,7 +17,7 @@ code {
 }
 
 .channellist {
-  background-color: rgba(211, 211, 211, 0.726);
+  /*background-color: rgba(211, 211, 211, 0.726);*/
   height: 70vh;
   overflow: auto;
   padding-top: 5px;
@@ -25,7 +25,7 @@ code {
 
 
 .submitButton {
-  background-color: #DDDDDD;
+  /*background-color: #DDDDDD;*/
   border: none;
   border-radius: 5px;
   margin: 10px;
@@ -43,26 +43,26 @@ code {
 
 .leftCol {
   height: 94vh;
-  background-color: rgba(32, 34, 37, .6);
+  /*background-color: rgba(32, 34, 37, .6);*/
 }
 
 .rightCol {
-  background-color: rgb(134, 133, 130);
+  /*background-color: rgb(134, 133, 130);*/
   height: 94vh;
 }
 
 .btn-primary {
-  background-color: rgb(65, 64, 62) !important;
-  border-color: black !important;
+  /*background-color: rgb(65, 64, 62) !important;*/
+  /*border-color: black !important;*/
   /*text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;*/
 }
 
 .btn-primary:hover {
-  background-color: black !important;
+  /*background-color: black !important;*/
 }
 
 .btn-primary:visited {
-  background-color: darkgrey;
+  /*background-color: darkgrey;*/
 }
 
 .btn-create {
@@ -78,13 +78,13 @@ code {
 }
 
 .chatRoomTitle {
-  background-color: aliceblue;
+  /*background-color: aliceblue;*/
   height: 6vh;
 }
 
 .inviteModal {
   height: 94vh;
-  background-color: lightsteelblue;
+  /*background-color: lightsteelblue;*/
   padding-top: 40px;
 }
 
@@ -94,7 +94,7 @@ code {
 }
 
 .mb-3 {
-  margin-top: 0vh;
+  margin-top: 0;
 }
 
 .invalidUsername {
@@ -106,10 +106,13 @@ code {
   height: 70vh;
   padding-top: 5px;
 }
-.signup{
-position:relative;
-left:305px
+
+.signup {
+  position: relative;
+  left: 305px;
+  text-align: center;
 }
-.login{
+
+.login {
 
 }

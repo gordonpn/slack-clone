@@ -1,5 +1,13 @@
-import React, { Component } from "react";
-import {MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput} from "mdbreact";
+import React, {Component} from "react";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBInput
+} from "mdbreact";
 
 export default class Login extends Component {
   constructor(props) {
@@ -18,7 +26,7 @@ export default class Login extends Component {
   }
 
   handleChange(e) {
-    this.setState({ username: e.target.value });
+    this.setState({username: e.target.value});
   }
 
   enableLoginPage(e) {
@@ -54,12 +62,14 @@ export default class Login extends Component {
       username: ""
     });
   }
+
   handleLogPress(event) {
     let code = event.keyCode || event.which;
     if (code === 13) {
       this.login(event);
     }
   }
+
   handleSignPress(event) {
     let code = event.keyCode || event.which;
     if (code === 13) {
@@ -100,7 +110,8 @@ export default class Login extends Component {
                       Log in
                     </MDBBtn>
                   </div>
-                  <p className="font-small grey-text d-flex justify-content-center">
+                  <p
+                    className="font-small grey-text d-flex justify-content-center">
                     Don't have an account?
                     <a
                       href="#!"
@@ -152,7 +163,8 @@ export default class Login extends Component {
                       Sign Up
                     </MDBBtn>
                   </div>
-                  <p className="font-small grey-text d-flex justify-content-center">
+                  <p
+                    className="font-small grey-text d-flex justify-content-center">
                     Already Have a Username?
                     <a
                       href="#!"
