@@ -146,13 +146,10 @@ export default class ChatDashboard extends Component {
     try {
       const response = await updateUserChannel(userName, channelId);
       if (response.status === 200) {
-        const room = await this.state.chatKitUser.addUserToRoom({
+        await this.state.chatKitUser.addUserToRoom({
           userId: response.data.user.username,
           roomId: channelId
         });
-        this.setState({
-          users: room.users
-        })
         return true;
       }
     } catch (error) {
