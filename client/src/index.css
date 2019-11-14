@@ -74,7 +74,7 @@ code {
 }
 
 .messageBox {
-  margin-top: 1 -px;
+  margin-top: 1px;
 }
 
 .chatRoomTitle {
@@ -105,4 +105,11 @@ code {
   overflow: auto;
   height: 70vh;
   padding-top: 5px;
+}
+.signup{
+position:relative;
+left:305px
+}
+.login{
+
 }

@@ -1,4 +1,5 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
+import {MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBInput} from "mdbreact";
 
 export default class Login extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ export default class Login extends Component {
   }
 
   handleChange(e) {
-    this.setState({username: e.target.value});
+    this.setState({ username: e.target.value });
   }
 
   enableLoginPage(e) {
@@ -26,7 +27,7 @@ export default class Login extends Component {
       loginPage: true,
       signUpPage: false,
       username: ""
-    })
+    });
   }
 
   enableSignUpPage(e) {
@@ -35,7 +36,7 @@ export default class Login extends Component {
       loginPage: false,
       signUpPage: true,
       username: ""
-    })
+    });
   }
 
   signUp(e) {
@@ -43,7 +44,7 @@ export default class Login extends Component {
     this.props.setUser(this.state.username);
     this.setState({
       username: ""
-    })
+    });
   }
 
   login(e) {
@@ -51,54 +52,127 @@ export default class Login extends Component {
     this.props.logUserIn(this.state.username);
     this.setState({
       username: ""
-    })
+    });
   }
-
+  handleLogPress(event) {
+    let code = event.keyCode || event.which;
+    if (code === 13) {
+      this.login(event);
+    }
+  }
+  handleSignPress(event) {
+    let code = event.keyCode || event.which;
+    if (code === 13) {
+      this.signUp(event);
+    }
+  }
 
   loginPage() {
     return (
-      <div className="col-sm">
-        <h3>Login Page</h3>
-        <br/>
-        <form>
-          <label>
-            username:
-            <input type="text" value={this.state.username}
-                   onChange={this.handleChange}/>
-            <button onClick={e => this.login(e)}
-                    disabled={!this.state.username}> log me in
-            </button>
-          </label>
-          <div>
-            Don't have username? sign up here
-            <button onClick={e => this.enableSignUpPage(e)}> sign me up</button>
-          </div>
-        </form>
-      </div>
-    )
-  };
+      <MDBContainer>
+        <div className="signup">
+          <MDBRow>
+            <MDBCol md="6">
+              <MDBCard>
+                <div className="header pt-3 grey lighten-2">
+                  <div className="text-center">
+                    <h3>
+                      <strong>Log In</strong>
+                    </h3>
+                  </div>
+                </div>
+                <MDBCardBody className="mx-4 mt-4">
+                  <MDBInput
+                    id="userinput"
+                    label="Your Username"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                    onKeyPress={this.handleLogPress.bind(this)}
+                  />
+
+                  <div className="text-center mb-4 mt-5">
+                    <MDBBtn
+                      id="logbutton"
+                      onClick={e => this.login(e)}
+                      disabled={!this.state.username}
+                      color="danger"
+                      type="button"
+                      className="btn-block z-depth-2"
+                    >
+                      Log in
+                    </MDBBtn>
+                  </div>
+                  <p className="font-small grey-text d-flex justify-content-center">
+                    Don't have an account?
+                    <a
+                      href="#!"
+                      className="dark-grey-text font-weight-bold ml-1"
+                      onClick={e => this.enableSignUpPage(e)}
+                      id="signup1"
+                    >
+                      Sign up
+                    </a>
+                  </p>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          </MDBRow>
+        </div>
+      </MDBContainer>
+    );
+  }
 
   signUpPage() {
     return (
-      <div className="col-sm">
-        <h3>Sign Up Page</h3>
-        <br/>
-        <form>
-          <label>
-            username:
-            <input type="text" value={this.state.username}
-                   onChange={this.handleChange}/>
-            <button onClick={e => this.signUp(e)}
-                    disabled={!this.state.username}> Sign me up
-            </button>
-          </label>
-          <div>
-            already have a username? log in here
-            <button onClick={e => this.enableLoginPage(e)}> log me in</button>
-          </div>
-        </form>
-      </div>
-    )
+      <MDBContainer>
+        <div className="signup">
+          <MDBRow>
+            <MDBCol md="6">
+              <MDBCard>
+                <div className="header pt-3 grey lighten-2">
+                  <div className="text-center">
+                    <h3>
+                      <strong>Sign Up</strong>
+                    </h3>
+                  </div>
+                </div>
+                <MDBCardBody className="mx-4 mt-4">
+                  <MDBInput
+                    label="Your Username"
+                    value={this.state.username}
+                    onChange={this.handleChange}
+                    onKeyPress={this.handleSignPress.bind(this)}
+                  />
+
+                  <div className="text-center mb-4 mt-5">
+                    <MDBBtn
+                      onClick={e => this.signUp(e)}
+                      disabled={!this.state.username}
+                      color="danger"
+                      type="button"
+                      className="btn-block z-depth-2"
+                    >
+                      Sign Up
+                    </MDBBtn>
+                  </div>
+                  <p className="font-small grey-text d-flex justify-content-center">
+                    Already Have a Username?
+                    <a
+                      href="#!"
+                      className="dark-grey-text font-weight-bold ml-1"
+                      onClick={e => this.enableLoginPage(e)}
+                      id="log1"
+                    >
+                      Log In
+                    </a>
+                  </p>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          </MDBRow>
+        </div>
+      </MDBContainer>
+    );
   }
 
   render() {

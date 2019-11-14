@@ -67,6 +67,7 @@ export default class App extends Component {
       const response = await getUserByName(userName);
       if (response.data.length === 0) {
         console.log("invalid username");
+        alert("Invalid Username");
         return
       }
       const newUser = {

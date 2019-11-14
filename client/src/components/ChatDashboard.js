@@ -18,7 +18,8 @@ export default class ChatDashboard extends Component {
       chatKitRooms: [],
       messages: [],
       channelSelected: '',
-      isLoadingChannels: true
+      isLoadingChannels: true,
+      usersTyping: []
     };
 
     this.selectChannel = this.selectChannel.bind(this);
@@ -68,9 +69,9 @@ export default class ChatDashboard extends Component {
     this.loadChannels();
   }
 
-  componentWillUnmount() {
+  /*componentWillUnmount() {
     this.state.chatKitUser.disconnect();
-  }
+  }*/
 
   async loadChannels() {
     let loadedChannels = Array.from(await getChannelsForUser(this.state.user['channelIDs']));
@@ -93,6 +94,16 @@ export default class ChatDashboard extends Component {
         onMessage: message => {
           this.setState({
             messages: [...this.state.messages, message]
+          })
+        },
+        onUserStartedTyping: user => {
+          this.setState({
+            usersTyping: [...this.state.usersTyping, user.name]
+          });
+        },
+        onUserStoppedTyping: user => {
+          this.setState({
+            usersTyping: this.state.usersTyping.filter(userName => userName !== user.name)
           })
         }
       }
@@ -191,6 +202,7 @@ export default class ChatDashboard extends Component {
                   messages={this.state.messages}
                   users={this.state.channelSelected.users}
                   sendInvite={this.sendInvite}
+                  usersTyping={this.state.usersTyping}
                 />
               )}
           </div>

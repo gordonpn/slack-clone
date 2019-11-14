@@ -3,6 +3,7 @@ import MessageBox from './MessageBox';
 import InviteModal from './InviteModal';
 import MessageList from './MessageList';
 import UserList from './UserList';
+import UsersTyping from './UsersTyping';
 export default class ChatRoom extends Component {
 
   render() {
@@ -22,6 +23,7 @@ export default class ChatRoom extends Component {
           <div className="row">
             <div className="col-md-12 messageBox">
               <MessageBox user={this.props.user} channel={this.props.channel} />
+              <UsersTyping usersTyping={this.props.usersTyping} />
             </div>
           </div>
         </div>
