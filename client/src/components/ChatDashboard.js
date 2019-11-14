@@ -17,7 +17,8 @@ export default class ChatDashboard extends Component {
       chatKitRooms: [],
       messages: [],
       channelSelected: '',
-      isLoadingChannels: true
+      isLoadingChannels: true,
+      usersTyping: []
     };
 
     this.selectChannel = this.selectChannel.bind(this);
@@ -85,6 +86,16 @@ export default class ChatDashboard extends Component {
         onMessage: message => {
           this.setState({
             messages: [...this.state.messages, message]
+          })
+        },
+        onUserStartedTyping: user => {
+          this.setState({
+            usersTyping: [...this.state.usersTyping, user.name]
+          });
+        },
+        onUserStoppedTyping: user => {
+          this.setState({
+            usersTyping: this.state.usersTyping.filter(userName => userName !== user.name)
           })
         }
       }
@@ -160,12 +171,13 @@ export default class ChatDashboard extends Component {
             {!this.state.channelSelected ? (
               <div align="center">Please select a channel</div>
             ) : (
-              <ChatRoom
-                channel={this.state.channelSelected}
-                user={this.state.chatKitUser}
-                messages={this.state.messages}
-              />
-            )}
+                <ChatRoom
+                  channel={this.state.channelSelected}
+                  user={this.state.chatKitUser}
+                  messages={this.state.messages}
+                  usersTyping={this.state.usersTyping}
+                />
+              )}
           </div>
         </div>
       </div>
