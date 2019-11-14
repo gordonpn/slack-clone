@@ -3,6 +3,7 @@ import ChatRoom from './ChatRoom';
 import AddChannelForm from './AddChannelForm';
 import ChannelList from './ChannelList';
 import {addChannels, getChannelsForUser} from '../api/channels';
+import {updateUserChannel} from '../api/users';
 import ChatKit from '@pusher/chatkit-client';
 
 
@@ -24,6 +25,7 @@ export default class ChatDashboard extends Component {
     this.selectChannel = this.selectChannel.bind(this);
     this.addChannel = this.addChannel.bind(this);
     this.deleteChannel = this.deleteChannel.bind(this);
+    this.sendInvite = this.sendInvite.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +48,12 @@ export default class ChatDashboard extends Component {
           if (room.createdByUserId !== this.state.chatKitUser.id) {
             alert(`You have been added to room ${room.name}`)
           }
+        },
+        onUserJoined: user => {
+          this.forceUpdate()
+        },
+        onPresenceChanged: member => {
+          this.forceUpdate()
         }
       })
       .then(currentUser => {
@@ -73,14 +81,14 @@ export default class ChatDashboard extends Component {
   }
 
   async selectChannel(channel) {
-    if (channel === this.state.channelSelected) {
+    if (channel.id === this.state.channelSelected.id) {
       return;
     }
 
     this.setState({
       messages: []
-    });
-    await this.state.chatKitUser.subscribeToRoomMultipart({
+    })
+    const selectChannel = await this.state.chatKitUser.subscribeToRoomMultipart({
       roomId: channel.id,
       hooks: {
         onMessage: message => {
@@ -99,8 +107,10 @@ export default class ChatDashboard extends Component {
           })
         }
       }
+    })
+    this.setState({
+      channelSelected: selectChannel
     });
-    this.setState({channelSelected: channel});
   }
 
   async addChannel(e, name) {
@@ -143,6 +153,21 @@ export default class ChatDashboard extends Component {
     });
   }
 
+  async sendInvite(userName, channelId) {
+    try {
+      const response = await updateUserChannel(userName, channelId);
+      if (response.status === 200) {
+        await this.state.chatKitUser.addUserToRoom({
+          userId: response.data.user.username,
+          roomId: channelId
+        });
+        return true;
+      }
+    } catch (error) {
+      return false;
+    }
+  }
+
   render() {
     return (
       <div>
@@ -175,6 +200,8 @@ export default class ChatDashboard extends Component {
                   channel={this.state.channelSelected}
                   user={this.state.chatKitUser}
                   messages={this.state.messages}
+                  users={this.state.channelSelected.users}
+                  sendInvite={this.sendInvite}
                   usersTyping={this.state.usersTyping}
                 />
               )}
