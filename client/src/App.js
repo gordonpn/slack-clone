@@ -104,7 +104,6 @@ export default class App extends Component {
         darkMode: false,
         modeHasChanged: true
       });
-      console.log("switched to light theme");
       import("bootswatch/dist/flatly/bootstrap.min.css");
       this.reloadCss();
     }
@@ -114,7 +113,6 @@ export default class App extends Component {
         darkMode: true,
         modeHasChanged: true
       });
-      console.log("switched to dark theme");
       import("bootswatch/dist/darkly/bootstrap.min.css");
       this.reloadCss();
     }

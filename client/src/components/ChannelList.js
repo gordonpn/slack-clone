@@ -17,7 +17,7 @@ export default class ChannelList extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-md-12 channellist">
+          <div className="col-md-12 channelList">
             <ClipLoader
               css={override}
               sizeUnit={"px"}

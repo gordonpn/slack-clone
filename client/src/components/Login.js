@@ -80,7 +80,7 @@ export default class Login extends Component {
   loginPage() {
     return (
       <MDBContainer>
-        <div className="signup">
+        <div className="signUp">
           <MDBRow>
             <MDBCol md="6">
               <MDBCard>
@@ -136,7 +136,7 @@ export default class Login extends Component {
   signUpPage() {
     return (
       <MDBContainer>
-        <div className="signup">
+        <div className="signUp">
           <MDBRow>
             <MDBCol md="6">
               <MDBCard>
