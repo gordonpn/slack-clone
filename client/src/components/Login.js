@@ -83,6 +83,7 @@ export default class Login extends Component {
                 </div>
                 <MDBCardBody className="mx-4 mt-4">
                   <MDBInput
+                    id="userinput"
                     label="Your Username"
                     value={this.state.username}
                     onChange={this.handleChange}
@@ -91,6 +92,7 @@ export default class Login extends Component {
 
                   <div className="text-center mb-4 mt-5">
                     <MDBBtn
+                      id="logbutton"
                       onClick={e => this.login(e)}
                       disabled={!this.state.username}
                       color="danger"
@@ -106,6 +108,7 @@ export default class Login extends Component {
                       href="#!"
                       className="dark-grey-text font-weight-bold ml-1"
                       onClick={e => this.enableSignUpPage(e)}
+                      id="signup1"
                     >
                       Sign up
                     </a>
@@ -158,6 +161,7 @@ export default class Login extends Component {
                       href="#!"
                       className="dark-grey-text font-weight-bold ml-1"
                       onClick={e => this.enableLoginPage(e)}
+                      id="log1"
                     >
                       Log In
                     </a>
