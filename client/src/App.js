@@ -17,7 +17,8 @@ export default class App extends Component {
       isLoggedIn: isLoggedIn,
       isLoading: false,
       wasLoggedIn: wasLoggedIn,
-      darkMode: true
+      darkMode: true,
+      modeHasChanged: false
     };
     this.setUser = this.setUser.bind(this);
     this.logUserIn = this.logUserIn.bind(this);
@@ -100,21 +101,33 @@ export default class App extends Component {
   handleModeChange() {
     if (this.state.darkMode) {
       this.setState({
-        darkMode: false
+        darkMode: false,
+        modeHasChanged: true
       });
       console.log("switched to light theme");
       import("bootswatch/dist/flatly/bootstrap.min.css");
+      this.reloadCss();
     }
 
     if (!this.state.darkMode) {
       this.setState({
-        darkMode: true
+        darkMode: true,
+        modeHasChanged: true
       });
       console.log("switched to dark theme");
       import("bootswatch/dist/darkly/bootstrap.min.css");
+      this.reloadCss();
     }
   }
 
+  reloadCss() {
+    if (this.state.modeHasChanged) {
+      window.location.reload();
+      this.setState({
+        modeHasChanged: false
+      });
+    }
+  }
 
   render() {
     return (
