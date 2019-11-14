@@ -11,7 +11,7 @@ export default class UsersTyping extends Component {
     } else if (this.props.usersTyping.length > 1) {
       return (
         <div>
-          {`${this.props.usersTyping.join(', ')} are typing`}
+          {`${this.props.usersTyping.join(', ')} are typing...`}
         </div>
       )
     } else {
