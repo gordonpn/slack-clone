@@ -3,6 +3,7 @@ import ChatDashboard from "./components/ChatDashboard";
 import Login from "./components/Login";
 import {getUserByName, addUser} from "./api/users";
 import Button from "react-bootstrap/Button";
+import Toggle from 'react-toggle'
 import "./index.css";
 
 export default class App extends Component {
@@ -15,7 +16,9 @@ export default class App extends Component {
       user: {username: "", id: "", friendIDs: [], channelIDs: []},
       isLoggedIn: isLoggedIn,
       isLoading: false,
-      wasLoggedIn: wasLoggedIn
+      wasLoggedIn: wasLoggedIn,
+      darkMode: true,
+      modeHasChanged: false
     };
     this.setUser = this.setUser.bind(this);
     this.logUserIn = this.logUserIn.bind(this);
@@ -40,7 +43,7 @@ export default class App extends Component {
       };
       this.setState({
         user: newUser,
-        isLoggedIn: true
+        isLoggedIn: true,
       });
     } catch (error) {
       sessionStorage.clear();
@@ -95,6 +98,35 @@ export default class App extends Component {
     sessionStorage.clear();
   }
 
+  handleModeChange() {
+    if (this.state.darkMode) {
+      this.setState({
+        darkMode: false,
+        modeHasChanged: true
+      });
+      import("bootswatch/dist/flatly/bootstrap.min.css");
+      this.reloadCss();
+    }
+
+    if (!this.state.darkMode) {
+      this.setState({
+        darkMode: true,
+        modeHasChanged: true
+      });
+      import("bootswatch/dist/darkly/bootstrap.min.css");
+      this.reloadCss();
+    }
+  }
+
+  reloadCss() {
+    if (this.state.modeHasChanged) {
+      window.location.reload();
+      this.setState({
+        modeHasChanged: false
+      });
+    }
+  }
+
   render() {
     return (
       <div className="container-fluid">
@@ -109,6 +141,13 @@ export default class App extends Component {
           </Button>
           }
         </div>
+        <label>
+          <Toggle
+            defaultChecked={this.state.darkMode}
+            icons={false}
+            onChange={this.handleModeChange.bind(this)}/>
+          <span>Toggle theme</span>
+        </label>
         {!this.state.isLoggedIn ? (
           <Login logUserIn={this.logUserIn} setUser={this.setUser}/>
         ) : (
