@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import MessageBox from './MessageBox';
 import InviteModal from './InviteModal';
 import MessageList from './MessageList';
+import UserList from './UserList';
 import UsersTyping from './UsersTyping';
 export default class ChatRoom extends Component {
 
@@ -27,7 +28,8 @@ export default class ChatRoom extends Component {
           </div>
         </div>
         <div className="col-md-4 inviteModal" align="center">
-          <InviteModal channelId={this.props.channel.id} user={this.props.user} />
+          <InviteModal sendInvite={this.props.sendInvite} channelId={this.props.channel.id} user={this.props.user} />
+          <UserList users={this.props.users} />
         </div>
       </div>
 
