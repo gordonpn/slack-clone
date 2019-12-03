@@ -1,6 +1,6 @@
 # SOEN341-project
 
-[![Build Status](https://travis-ci.com/gpnn/soen341-project.svg?token=k8zgsLd2PutjdAoQXZYy&branch=master)](https://travis-ci.com/gpnn/slack-clone.svg?branch=master)
+[![Build Status](https://travis-ci.com/gpnn/slack-clone.svg?branch=master)](https://travis-ci.com/gpnn/slack-clone)
 
 ## Description
 
