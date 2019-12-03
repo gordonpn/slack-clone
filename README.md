@@ -1,6 +1,6 @@
 # SOEN341-project
 
-[![Build Status](https://travis-ci.com/gpnn/soen341-project.svg?token=k8zgsLd2PutjdAoQXZYy&branch=master)](https://travis-ci.com/gpnn/soen341-project)
+[![Build Status](https://travis-ci.com/gpnn/soen341-project.svg?token=k8zgsLd2PutjdAoQXZYy&branch=master)](https://travis-ci.com/gpnn/slack-clone.svg?branch=master)
 
 ## Description
 
@@ -41,8 +41,9 @@ Note that you must have authentication data to the MongoDB instance to manipulat
 
 ## Running the tests
 
-Explain how to run the automated tests for this web application
-
+````bash
+npm test
+````
 ## Block diagram
 
 ![block diagram](doc/Block-diagram.png)
@@ -53,10 +54,6 @@ Explain how to run the automated tests for this web application
 * [Express](https://expressjs.com/) - Web framework for Node.js
 * [React](https://reactjs.org/) - JavaScript library for user interfaces
 * [Node.js](https://nodejs.org/en/) - JavaScript run-time environment
-
-## Contributing
-
-Describe how others can contribute to this project
 
 ## Authors
 
@@ -69,10 +66,4 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-Define a license for this project
-
-## Acknowledgments
-
-List of humans that helped us with this project
-
-## Project status
+MIT License
